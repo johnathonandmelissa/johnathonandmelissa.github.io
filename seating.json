@@ -5,7 +5,7 @@
     "date": "Saturday, November 28, 2026",
     "place": "Flint, Michigan"
   },
-  "example": true,
+  "example": false,
   "tables": [
     {
       "name": "Head Table",
@@ -94,5 +94,6 @@
         "John Abboud"
       ]
     }
-  ]
+  ],
+  "unseated": []
 }
