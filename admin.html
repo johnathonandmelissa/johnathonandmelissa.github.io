@@ -4,22 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#11201a">
+<meta name="theme-color" content="#262a1a">
 <title>Seating Admin · Johnathon &amp; Melissa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* Layout: one narrow column for the guest finder on phones, a wrapping grid of table cards below. Cedar green + champagne. */
+/* Layout: one narrow column for the guest finder on phones, a wrapping grid of table cards below. Burgundy + olive green, gold foil accents. */
 :root{
-  --bg:#11201a;
-  --surface:#192c23;
-  --line:#2f473b;
-  --ink:#f1ece0;
-  --muted:#a7b4aa;
-  --gold:#d2b273;
-  --gold-ink:#1c160a;
-  --warn:#e8a65c;
+  --bg:#262a1a;        /* olive velvet */
+  --surface:#30351f;
+  --line:#4a5034;
+  --ink:#f3ede1;       /* ivory card stock */
+  --muted:#bcb8a0;
+  --gold:#c9a96a;      /* invitation foil */
+  --gold-ink:#1f1a10;
+  --wine:#6c1c2c;      /* burgundy */
+  --wine-deep:#4b1420;
+  --wine-ink:#f7efe7;
+  --warn:#e3a35b;
   --display:"Cormorant Garamond", Georgia, "Times New Roman", serif;
   --body:"Jost", "Helvetica Neue", Arial, sans-serif;
   color-scheme:dark;
@@ -45,20 +48,20 @@ h1 .amp{font-style:italic;color:var(--gold)}
 /* Finder */
 .finder{max-width:560px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:12px}
 .finder label{font-family:var(--display);font-size:26px;text-align:center}
-.search{width:100%;padding:16px 18px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:18px}
+.search{width:100%;padding:16px 18px;border-radius:12px;border:1px solid var(--gold);background:var(--surface);font-size:18px}
 .search::placeholder{color:var(--muted)}
 .results{display:flex;flex-direction:column;gap:10px}
-.result{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 16px;padding:16px 18px;border-radius:12px;background:var(--gold);color:var(--gold-ink)}
+.result{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 16px;padding:16px 18px;border-radius:12px;background:var(--wine);color:var(--wine-ink);border:1px solid var(--gold)}
 .r-name{font-weight:600;font-size:18px}
 .r-label{grid-column:1;font-size:13px;opacity:.8}
-.r-table{grid-column:2;grid-row:1 / span 2;font-family:var(--display);font-weight:600;font-size:28px;text-align:right;line-height:1.1}
+.r-table{color:var(--gold);grid-column:2;grid-row:1 / span 2;font-family:var(--display);font-weight:600;font-size:28px;text-align:right;line-height:1.1}
 .nomatch{margin:0;padding:14px 16px;border-radius:12px;border:1px dashed var(--line);color:var(--muted);text-align:center}
 
 /* Tables grid */
 .section-h{margin:0 0 14px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
-.card.hit{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.card.hit{background:var(--wine-deep);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
 .card-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
 .card h3{margin:0;font-family:var(--display);font-weight:600;font-size:24px;line-height:1.15}
 .count{font-size:12px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
@@ -77,7 +80,7 @@ footer{display:flex;justify-content:center}
 .spacer{flex:1}
 .btn{padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:14px;font-weight:500}
 .btn:hover{border-color:var(--gold)}
-.btn.primary{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.btn.primary{background:var(--wine);color:var(--wine-ink);border-color:var(--gold)}
 .btn.primary[disabled]{opacity:.55;cursor:default}
 .btn.small{padding:5px 10px;font-size:13px}
 .chip{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--warn);color:var(--warn)}
