@@ -1,0 +1,98 @@
+{
+  "event": {
+    "title": "Johnathon & Melissa",
+    "subtitle": "Engagement Celebration",
+    "date": "Saturday, November 28, 2026",
+    "place": "Flint, Michigan"
+  },
+  "example": true,
+  "tables": [
+    {
+      "name": "Head Table",
+      "seats": 8,
+      "guests": [
+        "Johnathon Tannous",
+        "Melissa",
+        "Maria Haddad",
+        "George Haddad",
+        "Rita Khoury",
+        "Elias Khoury"
+      ]
+    },
+    {
+      "name": "Table 1",
+      "seats": 8,
+      "guests": [
+        "Sarah Nassar",
+        "Michael Nassar",
+        "Layla Saad",
+        "Joseph Saad",
+        "Nadia Farah",
+        "Peter Farah",
+        "Hanna Aoun",
+        "Tony Aoun"
+      ]
+    },
+    {
+      "name": "Table 2",
+      "seats": 8,
+      "guests": [
+        "Christine Daher",
+        "Paul Daher",
+        "Maya Issa",
+        "Sami Issa",
+        "Rania Gemayel",
+        "Fadi Gemayel"
+      ]
+    },
+    {
+      "name": "Table 3",
+      "seats": 8,
+      "guests": [
+        "Amanda Price",
+        "Kevin Price",
+        "Jessica Moore",
+        "Daniel Moore",
+        "Lauren Hill",
+        "Chris Hill",
+        "Emily Ward"
+      ]
+    },
+    {
+      "name": "Table 4",
+      "seats": 8,
+      "guests": [
+        "Nicole Bitar",
+        "Marc Bitar",
+        "Joanna Hayek",
+        "Ramy Hayek",
+        "Celine Matar",
+        "Karl Matar"
+      ]
+    },
+    {
+      "name": "Table 5",
+      "seats": 8,
+      "guests": [
+        "Rachel Stone",
+        "Ryan Stone",
+        "Megan Ellis",
+        "Tyler Ellis",
+        "Hannah Brooks",
+        "Andrew Brooks"
+      ]
+    },
+    {
+      "name": "Table 6",
+      "seats": 8,
+      "guests": [
+        "Yara Chamoun",
+        "Elie Chamoun",
+        "Diana Rizk",
+        "Antoine Rizk",
+        "Grace Abboud",
+        "John Abboud"
+      ]
+    }
+  ]
+}
