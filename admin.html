@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#11201a">
+<title>Seating Admin · Johnathon &amp; Melissa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: one narrow column for the guest finder on phones, a wrapping grid of table cards below. Cedar green + champagne. */
+:root{
+  --bg:#11201a;
+  --surface:#192c23;
+  --line:#2f473b;
+  --ink:#f1ece0;
+  --muted:#a7b4aa;
+  --gold:#d2b273;
+  --gold-ink:#1c160a;
+  --warn:#e8a65c;
+  --display:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --body:"Jost", "Helvetica Neue", Arial, sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 20px 56px;display:flex;flex-direction:column;gap:36px}
+
+/* Hero */
+.hero{text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
+.eyebrow{margin:0;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+h1{margin:0;font-family:var(--display);font-weight:500;font-size:clamp(40px,8vw,64px);line-height:1.05;text-wrap:balance}
+h1 .amp{font-style:italic;color:var(--gold)}
+.date{margin:4px 0 0;color:var(--muted)}
+.rule{display:flex;align-items:center;gap:10px;width:160px;margin-top:10px;color:var(--gold)}
+.rule::before,.rule::after{content:"";flex:1;height:1px;background:currentColor;opacity:.6}
+.rule span{width:6px;height:6px;transform:rotate(45deg);border:1px solid currentColor}
+.sample-pill{display:inline-block;margin-top:10px;padding:3px 10px;border:1px solid var(--warn);color:var(--warn);border-radius:999px;font-size:12px;letter-spacing:.04em}
+
+/* Finder */
+.finder{max-width:560px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.finder label{font-family:var(--display);font-size:26px;text-align:center}
+.search{width:100%;padding:16px 18px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:18px}
+.search::placeholder{color:var(--muted)}
+.results{display:flex;flex-direction:column;gap:10px}
+.result{display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 16px;padding:16px 18px;border-radius:12px;background:var(--gold);color:var(--gold-ink)}
+.r-name{font-weight:600;font-size:18px}
+.r-label{grid-column:1;font-size:13px;opacity:.8}
+.r-table{grid-column:2;grid-row:1 / span 2;font-family:var(--display);font-weight:600;font-size:28px;text-align:right;line-height:1.1}
+.nomatch{margin:0;padding:14px 16px;border-radius:12px;border:1px dashed var(--line);color:var(--muted);text-align:center}
+
+/* Tables grid */
+.section-h{margin:0 0 14px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.card.hit{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.card-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.card h3{margin:0;font-family:var(--display);font-weight:600;font-size:24px;line-height:1.15}
+.count{font-size:12px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.names{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px}
+.names li{padding:2px 0}
+.names li.me{color:var(--gold);font-weight:600}
+.empty{color:var(--muted);font-style:italic}
+footer{display:flex;justify-content:center}
+.linkish{background:none;border:0;color:var(--muted);font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:6px}
+
+/* Host mode */
+.hostbar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 20px}
+.hostbar-in{max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.hostbar strong{font-family:var(--display);font-size:22px;font-weight:600}
+.stats{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+.spacer{flex:1}
+.btn{padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:14px;font-weight:500}
+.btn:hover{border-color:var(--gold)}
+.btn.primary{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.btn.primary[disabled]{opacity:.55;cursor:default}
+.btn.small{padding:5px 10px;font-size:13px}
+.chip{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--warn);color:var(--warn)}
+.notice{padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-size:14px}
+.notice.warn{border-color:var(--warn)}
+.notice.ok{border-color:var(--gold)}
+.event-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.field{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--muted);letter-spacing:.04em}
+.input{width:100%;padding:9px 11px;border-radius:9px;border:1px solid var(--line);background:var(--bg);font-size:15px;color:var(--ink)}
+.card.host .card-head{align-items:center}
+.t-name{font-family:var(--display);font-size:22px;font-weight:600;padding:4px 8px;background:transparent;border:1px solid transparent;border-radius:8px;min-width:0;flex:1}
+.t-name:hover,.t-name:focus{border-color:var(--line);background:var(--bg)}
+.cap{font-size:12px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.cap.over{border-color:var(--warn);color:var(--warn)}
+.seats-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted)}
+.seats-row input{width:64px;padding:5px 8px}
+.hnames{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.hnames li{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:6px;padding:3px 0;border-bottom:1px solid var(--line)}
+.hnames li:last-child{border-bottom:0}
+.hnames select{max-width:118px;padding:3px 6px;font-size:12px;border-radius:7px;border:1px solid var(--line);background:var(--bg)}
+.x{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background:transparent;cursor:pointer;color:var(--muted);line-height:1}
+.x:hover{color:var(--ink);border-color:var(--warn)}
+.add{display:flex;gap:6px}
+.add .input{padding:7px 10px;font-size:14px}
+.card.pool{border-style:dashed}
+.addtable{min-height:120px;border:1px dashed var(--line);border-radius:14px;background:transparent;cursor:pointer;color:var(--muted);font-size:15px}
+.addtable:hover{border-color:var(--gold);color:var(--ink)}
+.import{display:flex;flex-direction:column;gap:10px}
+.import textarea{min-height:180px;resize:vertical;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+.hint{margin:0;color:var(--muted);font-size:13px}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+@media (max-width:420px){.wrap{padding:28px 16px 48px}.r-table{font-size:24px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.login{max-width:460px;margin:8vh auto 0;display:flex;flex-direction:column;gap:14px}
+.login h1{font-size:40px;text-align:center}
+.login ol{margin:0;padding-left:20px;color:var(--muted);font-size:14px;display:flex;flex-direction:column;gap:4px}
+.login a,.hostbar a{color:var(--gold)}
+.check{display:flex;gap:8px;align-items:center;font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+(function(){
+  "use strict";
+  var OWNER="johnathonandmelissa", REPO="johnathonandmelissa.github.io", PATH="seating.json", BRANCH="main";
+  var API="https://api.github.com/repos/"+OWNER+"/"+REPO+"/contents/"+PATH;
+  var TOKEN_KEY="seating-admin-token";
+  var app=document.getElementById("app");
+  var token=null, sha=null, saved=null, draft=null, dirty=false, status=null, importOpen=false, saving=false;
+
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function uid(){return "t"+Math.random().toString(36).slice(2,9);}
+  function clone(o){return JSON.parse(JSON.stringify(o));}
+  function splitNames(s){return String(s).split(",").map(function(x){return x.trim();}).filter(Boolean);}
+  function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function lsSet(k,v){try{if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v);}catch(e){}}
+  function b64decode(b){var bin=atob(b.replace(/\s/g,"")),bytes=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder().decode(bytes);}
+  function b64encode(str){var bytes=new TextEncoder().encode(str),bin="";for(var i=0;i<bytes.length;i++)bin+=String.fromCharCode(bytes[i]);return btoa(bin);}
+
+  function gh(method,body){
+    return fetch(API+(method==="GET"?"?ref="+BRANCH+"&t="+Date.now():""),{method:method,headers:{"Authorization":"Bearer "+token,"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"},body:body?JSON.stringify(body):undefined,cache:"no-store"})
+      .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok){var e=new Error(j.message||("HTTP "+r.status));e.status=r.status;throw e;}return j;});});
+  }
+  function normalize(d){
+    d.event=d.event||{title:"",subtitle:"",date:"",place:""};
+    d.tables=(d.tables||[]).map(function(t){return {id:t.id||uid(),name:t.name||"Table",seats:Number(t.seats)||8,guests:(t.guests||[]).slice()};});
+    d.unseated=(d.unseated||[]).slice();
+    return d;
+  }
+
+  /* ---------- Sign-in ---------- */
+  function renderLogin(err){
+    app.innerHTML='<main class="wrap"><section class="login">'+
+      '<p class="eyebrow" style="text-align:center">Seating admin</p><h1>Edit the seating chart</h1>'+
+      (err?'<div class="notice warn" role="alert">'+esc(err)+'</div>':'')+
+      '<label class="field" for="tok">GitHub access token<input id="tok" class="input" type="password" autocomplete="off" placeholder="github_pat_…"></label>'+
+      '<label class="check" for="rem"><input id="rem" type="checkbox" checked> Remember on this device</label>'+
+      '<button type="button" class="btn primary" data-act="login">Open editor</button>'+
+      '<div class="notice"><b>First time?</b> Create a token once:<ol>'+
+      '<li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a></li>'+
+      '<li>Resource owner: <b>johnathonandmelissa</b></li>'+
+      '<li>Repository access: <b>Only select repositories</b> → <b>johnathonandmelissa.github.io</b></li>'+
+      '<li>Permissions → Repository → <b>Contents: Read and write</b></li>'+
+      '<li>Generate, copy it, and paste it above</li></ol></div>'+
+      '<p class="hint" style="text-align:center"><a href="./">View guest page</a></p>'+
+    '</section></main>';
+    var t=document.getElementById("tok"); t.focus();
+    t.addEventListener("keydown",function(e){if(e.key==="Enter")login();});
+  }
+  function login(){
+    var v=document.getElementById("tok").value.trim(); if(!v) return;
+    token=v; if(document.getElementById("rem").checked) lsSet(TOKEN_KEY,v);
+    load();
+  }
+  function load(msg){
+    app.innerHTML='<main class="wrap"><p class="loading">Loading seating…</p></main>';
+    gh("GET").then(function(j){
+      sha=j.sha; saved=normalize(JSON.parse(b64decode(j.content)));
+      draft=clone(saved); dirty=false; status=msg||null; importOpen=false; render();
+    }).catch(function(e){
+      if(e.status===401||e.status===403||e.status===404){lsSet(TOKEN_KEY,null);token=null;renderLogin("That token can't open the seating file ("+e.message+"). Check it was made for johnathonandmelissa.github.io with Contents: Read and write.");}
+      else renderLogin("Couldn't load the seating ("+e.message+"). Check your connection and try again.");
+    });
+  }
+
+  /* ---------- Editor ---------- */
+  function listFor(id){ if(id==="__unseated") return draft.unseated; var t=draft.tables.find(function(x){return x.id===id;}); return t?t.guests:null; }
+  function tableOptions(cur){
+    return draft.tables.map(function(t){return '<option value="'+esc(t.id)+'"'+(t.id===cur?' selected':'')+'>'+esc(t.name)+'</option>';}).join("")+
+      '<option value="__unseated"'+(cur==="__unseated"?' selected':'')+'>Not seated</option>';
+  }
+  function guestRows(id,list){
+    if(!list.length) return '<p class="empty">No guests yet</p>';
+    return '<ul class="hnames">'+list.map(function(g,i){
+      return '<li><span>'+esc(g)+'</span><select class="g-move" data-t="'+esc(id)+'" data-g="'+i+'" aria-label="Move '+esc(g)+' to another table">'+tableOptions(id)+'</select>'+
+        '<button type="button" class="x" data-act="del-guest" data-t="'+esc(id)+'" data-g="'+i+'" aria-label="Remove '+esc(g)+'">×</button></li>';
+    }).join("")+'</ul>';
+  }
+  function addForm(id){ return '<form class="add" data-t="'+esc(id)+'"><input id="add-'+esc(id)+'" class="input" placeholder="Add guest (commas for several)" autocomplete="off"><button class="btn small" type="submit">Add</button></form>'; }
+  function toText(d){ var l=d.tables.map(function(t){return t.name+": "+t.guests.join(", ");}); if(d.unseated.length) l.push(d.unseated.join(", ")); return l.join("\n"); }
+
+  function render(){
+    var focusId=document.activeElement&&document.activeElement.id;
+    var seated=draft.tables.reduce(function(n,t){return n+t.guests.length;},0);
+    var seats=draft.tables.reduce(function(n,t){return n+(Number(t.seats)||0);},0);
+    var e=draft.event;
+    var h='<div class="hostbar"><div class="hostbar-in"><strong>Seating admin</strong>'+
+      '<span class="stats">'+seated+' seated · '+draft.unseated.length+' not seated · '+draft.tables.length+' tables · '+seats+' seats</span>'+
+      (dirty?'<span class="chip">Unsaved changes</span>':'')+'<span class="spacer"></span>'+
+      '<a class="btn" href="./" target="_blank" rel="noopener">Guest page</a>'+
+      '<button type="button" class="btn" data-act="import-open">Paste a list</button>'+
+      '<button type="button" class="btn" data-act="copy">Copy as text</button>'+
+      (dirty?'<button type="button" class="btn" data-act="discard">Discard changes</button>':'<button type="button" class="btn" data-act="logout">Sign out</button>')+
+      '<button type="button" class="btn primary" data-act="save"'+((!dirty||saving)?' disabled':'')+'>'+(saving?'Saving…':'Save for guests')+'</button>'+
+      '</div></div><main class="wrap">';
+    if(status) h+='<div class="notice '+(status.kind||'')+'" role="status">'+esc(status.text)+'</div>';
+    if(draft.example) h+='<div class="notice warn">These are sample names. Replace them by hand or with <b>Paste a list</b>, then press <b>Save for guests</b>.</div>';
+    if(importOpen){
+      h+='<section class="notice import"><label for="imp"><b>Paste your seating list</b></label>'+
+        '<p class="hint">One table per line: <code>Table name: Guest, Guest, Guest</code>. A line with no colon goes to Not seated. This replaces all current tables.</p>'+
+        '<textarea id="imp" class="input">'+esc(toText(draft))+'</textarea>'+
+        '<div class="row"><button type="button" class="btn primary" data-act="import-apply">Replace tables with this list</button><button type="button" class="btn" data-act="import-cancel">Cancel</button></div></section>';
+    }
+    h+='<section class="event-fields">'+['title','subtitle','date','place'].map(function(k){
+      var label={title:"Names",subtitle:"Event",date:"Date",place:"Place"}[k];
+      return '<label class="field" for="ev-'+k+'">'+label+'<input id="ev-'+k+'" class="input ev" data-k="'+k+'" value="'+esc(e[k]||"")+'"></label>';
+    }).join("")+'</section>';
+    h+='<div class="grid">'+draft.tables.map(function(t){
+      var over=t.guests.length>(Number(t.seats)||0);
+      return '<article class="card host"><div class="card-head"><input id="name-'+esc(t.id)+'" class="t-name" data-t="'+esc(t.id)+'" value="'+esc(t.name)+'" aria-label="Table name"><span class="cap'+(over?' over':'')+'">'+t.guests.length+'/'+t.seats+'</span></div>'+
+        '<div class="seats-row"><label for="seats-'+esc(t.id)+'">Seats <input id="seats-'+esc(t.id)+'" class="input t-seats" data-t="'+esc(t.id)+'" type="number" min="1" max="40" value="'+esc(t.seats)+'"></label>'+
+        '<button type="button" class="btn small" data-act="del-table" data-t="'+esc(t.id)+'">Remove table</button></div>'+
+        guestRows(t.id,t.guests)+addForm(t.id)+'</article>';
+    }).join("")+
+      '<article class="card host pool"><div class="card-head"><h3>Not seated</h3><span class="cap">'+draft.unseated.length+'</span></div><p class="hint">Hidden from guests. Removed tables send their guests here.</p>'+
+      guestRows("__unseated",draft.unseated)+addForm("__unseated")+'</article>'+
+      '<button type="button" class="addtable" data-act="add-table">+ Add a table</button></div></main>';
+    app.innerHTML=h;
+    if(focusId){var f=document.getElementById(focusId); if(f) f.focus();}
+  }
+  function changed(){ dirty=true; status=null; render(); }
+
+  function parseImport(text){
+    var tables=[],unseated=[];
+    text.split(/\r?\n/).forEach(function(line){
+      line=line.trim(); if(!line) return;
+      var i=line.indexOf(":");
+      if(i===-1){unseated=unseated.concat(splitNames(line));return;}
+      var g=splitNames(line.slice(i+1));
+      tables.push({id:uid(),name:line.slice(0,i).trim()||("Table "+(tables.length+1)),seats:Math.max(8,g.length),guests:g});
+    });
+    return {tables:tables,unseated:unseated};
+  }
+
+  function save(){
+    if(saving||!dirty) return;
+    saving=true; render();
+    var out=clone(draft); out.example=false;
+    out.tables=out.tables.map(function(t){return {name:t.name,seats:t.seats,guests:t.guests};});
+    gh("PUT",{message:"Update seating chart",content:b64encode(JSON.stringify(out,null,2)+"\n"),sha:sha,branch:BRANCH})
+      .then(function(j){ sha=j.content.sha; saving=false; draft.example=false; saved=clone(draft); dirty=false;
+        status={kind:"ok",text:"Saved. The guest page updates within a few minutes. Guests who already have it open may need to refresh."}; render(); })
+      .catch(function(e){ saving=false;
+        if(e.status===409||/does not match/i.test(e.message)) status={kind:"warn",text:"The seating was changed somewhere else since you opened it. Copy your changes as text, then reload this page."};
+        else if(e.status===401||e.status===403) status={kind:"warn",text:"Your token can't save ("+e.message+"). It needs Contents: Read and write on johnathonandmelissa.github.io."};
+        else status={kind:"warn",text:"Couldn't save ("+e.message+"). Check your connection and press Save again."};
+        render(); });
+  }
+
+  app.addEventListener("click",function(ev){
+    var b=ev.target.closest("[data-act]"); if(!b) return;
+    var act=b.getAttribute("data-act"), id=b.getAttribute("data-t");
+    if(act==="login") return login();
+    if(act==="save") return save();
+    if(act==="logout"){ lsSet(TOKEN_KEY,null); token=null; return renderLogin(); }
+    if(act==="discard"){ draft=clone(saved); dirty=false; status=null; return render(); }
+    if(act==="import-open"){ importOpen=true; render(); var t=document.getElementById("imp"); if(t) t.focus(); return; }
+    if(act==="import-cancel"){ importOpen=false; return render(); }
+    if(act==="import-apply"){ var p=parseImport(document.getElementById("imp").value); draft.tables=p.tables; draft.unseated=p.unseated; draft.example=false; importOpen=false; return changed(); }
+    if(act==="copy"){
+      var txt=toText(draft);
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(function(){status={kind:"ok",text:"Seating copied as text."};render();},function(){importOpen=true;render();}); }
+      else { importOpen=true; render(); }
+      return;
+    }
+    if(act==="add-table"){ var nId=uid(); draft.tables.push({id:nId,name:"Table "+draft.tables.length,seats:8,guests:[]}); changed(); var n=document.getElementById("name-"+nId); if(n){n.focus();n.select();} return; }
+    if(act==="del-table"){ var idx=draft.tables.findIndex(function(t){return t.id===id;}); if(idx>-1){ draft.unseated=draft.unseated.concat(draft.tables[idx].guests); draft.tables.splice(idx,1); changed(); } return; }
+    if(act==="del-guest"){ var l=listFor(id); if(l){ l.splice(Number(b.getAttribute("data-g")),1); changed(); } }
+  });
+  app.addEventListener("change",function(ev){
+    if(!draft) return;
+    var el=ev.target, id=el.getAttribute("data-t");
+    if(el.classList.contains("t-name")){ var t=draft.tables.find(function(x){return x.id===id;}); if(t){ t.name=el.value.trim()||t.name; changed(); } }
+    else if(el.classList.contains("t-seats")){ var t2=draft.tables.find(function(x){return x.id===id;}); if(t2){ t2.seats=Math.max(1,Math.min(40,parseInt(el.value,10)||1)); changed(); } }
+    else if(el.classList.contains("g-move")){ var from=listFor(id),to=listFor(el.value),gi=Number(el.getAttribute("data-g")); if(from&&to&&from!==to){ to.push(from.splice(gi,1)[0]); changed(); } }
+    else if(el.classList.contains("ev")){ draft.event[el.getAttribute("data-k")]=el.value.trim(); changed(); }
+  });
+  app.addEventListener("submit",function(ev){
+    var f=ev.target.closest("form.add"); if(!f) return; ev.preventDefault();
+    var id=f.getAttribute("data-t"), names=splitNames(f.querySelector("input").value); if(!names.length) return;
+    var l=listFor(id); if(!l) return; names.forEach(function(n){l.push(n);}); changed();
+    var again=document.getElementById("add-"+id); if(again) again.focus();
+  });
+  window.addEventListener("beforeunload",function(e){ if(dirty){ e.preventDefault(); e.returnValue=""; } });
+
+  token=lsGet(TOKEN_KEY);
+  if(token) load(); else renderLogin();
+})();
+</script>
+</body>
+</html>

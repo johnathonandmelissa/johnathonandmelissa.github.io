@@ -1,5 +1,6 @@
 # Engagement seating chart
 
-Guest page for Johnathon & Melissa's engagement celebration. Guests scan the QR code, type their name, and see their table.
+Guest page for Johnathon & Melissa's engagement celebration: https://johnathonandmelissa.github.io
 
-**To change the seating, edit `seating.json`**: each table has a `name`, a `seats` count, and a list of `guests`. Changes go live within a few minutes.
+- **Edit seating:** https://johnathonandmelissa.github.io/admin.html (needs a fine-grained GitHub token with Contents: Read and write on this repository; the page explains how to make one).
+- Seating data lives in `seating.json`. The guest page ignores the `unseated` list.
