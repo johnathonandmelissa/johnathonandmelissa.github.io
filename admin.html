@@ -99,7 +99,7 @@ footer{display:flex;justify-content:center}
 .seats-row{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;color:var(--muted)}
 .seats-row input{width:64px;padding:5px 8px}
 .hnames{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
-.hnames li{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:6px;padding:3px 0;border-bottom:1px solid var(--line)}
+.hnames li{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:6px;padding:3px 0;border-bottom:1px solid var(--line)}
 .hnames li:last-child{border-bottom:0}
 .hnames select{max-width:118px;padding:3px 6px;font-size:12px;border-radius:7px;border:1px solid var(--line);background:var(--bg)}
 .x{width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background:transparent;cursor:pointer;color:var(--muted);line-height:1}
@@ -129,10 +129,18 @@ footer{display:flex;justify-content:center}
 .o[disabled]{opacity:.3;cursor:default}
 .wrap > .grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,400px),1fr))}
 .hnames select{max-width:110px}
+.drag{cursor:grab;color:var(--muted);font-size:18px;line-height:1;padding:4px 2px;user-select:none;touch-action:none}
+.drag:active{cursor:grabbing}
+.hnames{min-height:40px}
+.hnames:empty{border:1px dashed var(--line);border-radius:9px;display:flex;align-items:center;justify-content:center}
+.hnames:empty::before{content:"No guests yet. Drag someone here.";color:var(--muted);font-style:italic;font-size:14px}
+.drag-ghost{opacity:.35}
+.drag-chosen{background:var(--wine);border-radius:8px}
 </style>
 </head>
 <body>
 <div id="app"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
 <script>
 (function(){
   "use strict";
@@ -204,15 +212,23 @@ footer{display:flex;justify-content:center}
       '<option value="__unseated"'+(cur==="__unseated"?' selected':'')+'>Not seated</option>';
   }
   function guestRows(id,list){
-    if(!list.length) return '<p class="empty">No guests yet</p>';
-    return '<ul class="hnames">'+list.map(function(g,i){
-      var last=list.length-1;
-      return '<li><input id="gname-'+esc(id)+'-'+i+'" class="g-name" data-t="'+esc(id)+'" data-g="'+i+'" value="'+esc(g)+'" aria-label="Guest name" autocomplete="off">'+
-        '<span class="order"><button type="button" id="up-'+esc(id)+'-'+i+'" class="o" data-act="up" data-t="'+esc(id)+'" data-g="'+i+'" aria-label="Move '+esc(g)+' up"'+(i===0?' disabled':'')+'>↑</button>'+
-        '<button type="button" id="down-'+esc(id)+'-'+i+'" class="o" data-act="down" data-t="'+esc(id)+'" data-g="'+i+'" aria-label="Move '+esc(g)+' down"'+(i===last?' disabled':'')+'>↓</button></span>'+
+    return '<ul class="hnames" data-t="'+esc(id)+'">'+list.map(function(g,i){
+      return '<li><span class="drag" title="Drag to move" aria-hidden="true">⠿</span>'+
+        '<input id="gname-'+esc(id)+'-'+i+'" class="g-name" data-t="'+esc(id)+'" data-g="'+i+'" value="'+esc(g)+'" aria-label="Guest name" autocomplete="off">'+
         '<select class="g-move" data-t="'+esc(id)+'" data-g="'+i+'" aria-label="Move '+esc(g)+' to another table">'+tableOptions(id)+'</select>'+
         '<button type="button" class="x" data-act="del-guest" data-t="'+esc(id)+'" data-g="'+i+'" aria-label="Remove '+esc(g)+'">×</button></li>';
     }).join("")+'</ul>';
+  }
+  function initDrag(){
+    if(!window.Sortable) return;
+    document.querySelectorAll("ul.hnames").forEach(function(ul){
+      Sortable.create(ul,{group:"guests",handle:".drag",animation:150,ghostClass:"drag-ghost",chosenClass:"drag-chosen",emptyInsertThreshold:24,
+        onEnd:function(evt){
+          var from=listFor(evt.from.getAttribute("data-t")), to=listFor(evt.to.getAttribute("data-t"));
+          if(!from||!to||(from===to&&evt.oldIndex===evt.newIndex)) return;
+          var item=from.splice(evt.oldIndex,1)[0]; to.splice(evt.newIndex,0,item); changed();
+        }});
+    });
   }
   function addForm(id){ return '<form class="add" data-t="'+esc(id)+'"><input id="add-'+esc(id)+'" class="input" placeholder="Add guest (commas for several)" autocomplete="off"><button class="btn small" type="submit">Add</button></form>'; }
   function toText(d){ var l=d.tables.map(function(t){return t.name+": "+t.guests.join(", ");}); if(d.unseated.length) l.push(d.unseated.join(", ")); return l.join("\n"); }
@@ -254,6 +270,7 @@ footer{display:flex;justify-content:center}
       guestRows("__unseated",draft.unseated)+addForm("__unseated")+'</article>'+
       '<button type="button" class="addtable" data-act="add-table">+ Add a table</button></div></main>';
     app.innerHTML=h;
+    initDrag();
     if(focusId){var f=document.getElementById(focusId); if(f) f.focus();}
   }
   function changed(){ dirty=true; status=null; render(); }
