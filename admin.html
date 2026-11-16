@@ -127,7 +127,8 @@ footer{display:flex;justify-content:center}
 .o{width:24px;height:26px;border-radius:7px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;line-height:1;font-size:13px;padding:0}
 .o:hover:not([disabled]){border-color:var(--gold)}
 .o[disabled]{opacity:.3;cursor:default}
-.card.host .grid,.wrap > .grid{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.wrap > .grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,400px),1fr))}
+.hnames select{max-width:110px}
 </style>
 </head>
 <body>
