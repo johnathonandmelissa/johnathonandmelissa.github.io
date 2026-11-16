@@ -38,8 +38,8 @@
         "Rana Tannous",
         "Samer Ghawi"
       ],
-      "x": 14.5,
-      "y": 27,
+      "x": 18,
+      "y": 28,
       "rot": 90
     },
     {
@@ -71,8 +71,8 @@
         "Lena Ibrahim",
         "Mariela Ibrahim"
       ],
-      "x": 25.5,
-      "y": 27,
+      "x": 31.5,
+      "y": 27.5,
       "rot": 90
     },
     {
@@ -88,8 +88,8 @@
         "Laila Shahla",
         "Nour Ishak"
       ],
-      "x": 3.5,
-      "y": 14.5,
+      "x": 10.5,
+      "y": 18,
       "rot": 0
     },
     {
@@ -107,8 +107,8 @@
         "Saher Ibrahim",
         "Angie Ibrahim"
       ],
-      "x": 19.5,
-      "y": 51.5,
+      "x": 4,
+      "y": 25.5,
       "rot": 0
     },
     {
@@ -125,8 +125,8 @@
         "Tony Daoud",
         "Amanda Daoud"
       ],
-      "x": 33.5,
-      "y": 7,
+      "x": 45.5,
+      "y": 53,
       "rot": 0
     },
     {
@@ -143,8 +143,8 @@
         "Sana Qassis",
         "Suhaila Abuaita"
       ],
-      "x": 34.5,
-      "y": 17,
+      "x": 21.5,
+      "y": 54,
       "rot": 0
     },
     {
@@ -160,8 +160,8 @@
         "Issa Abufarha",
         "Chelsy Abufarha"
       ],
-      "x": 8.5,
-      "y": 21.5,
+      "x": 4.5,
+      "y": 47,
       "rot": 0
     },
     {
@@ -181,7 +181,7 @@
         "Alondra Haddad"
       ],
       "x": 10,
-      "y": 51,
+      "y": 55,
       "rot": 0
     },
     {
@@ -197,8 +197,8 @@
         "Maya Halloun",
         "Angelina Abufarha"
       ],
-      "x": 3,
-      "y": 28,
+      "x": 13.5,
+      "y": 43.5,
       "rot": 0
     },
     {
@@ -214,8 +214,8 @@
         "Wael Hayek",
         "Kholoud Hayek"
       ],
-      "x": 34,
-      "y": 38.5,
+      "x": 37,
+      "y": 55.5,
       "rot": 0
     },
     {
@@ -231,8 +231,8 @@
         "George Abuaita",
         "Amal Abuaita"
       ],
-      "x": 36,
-      "y": 27.5,
+      "x": 44.5,
+      "y": 37,
       "rot": 0
     },
     {
@@ -250,8 +250,8 @@
         "Mousa Rishmawi",
         "Amanda Rishmawi"
       ],
-      "x": 4,
-      "y": 36,
+      "x": 24.5,
+      "y": 46.5,
       "rot": 0
     },
     {
@@ -268,8 +268,8 @@
         "Amira Hanna",
         "Elias Hanna"
       ],
-      "x": 4,
-      "y": 45.5,
+      "x": 34.5,
+      "y": 46.5,
       "rot": 0
     },
     {
@@ -286,8 +286,8 @@
         "Fr. Amin Houli",
         "Rania Houli"
       ],
-      "x": 29,
-      "y": 46.5,
+      "x": 29.5,
+      "y": 54.5,
       "rot": 0
     }
   ],
@@ -300,8 +300,8 @@
     {
       "id": "f1",
       "label": "Dance floor",
-      "x": 20,
-      "y": 7,
+      "x": 24.5,
+      "y": 6.5,
       "w": 16,
       "h": 12,
       "rot": 0
@@ -309,8 +309,8 @@
     {
       "id": "f2",
       "label": "Entrance",
-      "x": 38,
-      "y": 55.5,
+      "x": 48,
+      "y": 56,
       "w": 6,
       "h": 1,
       "rot": 90
