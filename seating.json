@@ -35,8 +35,12 @@
         "Bassam Tannous",
         "Deena Tannous",
         "Ramy Tannous",
-        "Rana Tannous"
-      ]
+        "Rana Tannous",
+        "Samer Ghawi"
+      ],
+      "x": 16.5,
+      "y": 4,
+      "rot": 0
     },
     {
       "name": "Head Table 2",
@@ -66,7 +70,10 @@
         "Miguel Ibrahim",
         "Lena Ibrahim",
         "Mariela Ibrahim"
-      ]
+      ],
+      "x": 44.5,
+      "y": 4,
+      "rot": 0
     },
     {
       "name": "Table 3",
@@ -80,7 +87,10 @@
         "Giselle Shahla",
         "Laila Shahla",
         "Nour Ishak"
-      ]
+      ],
+      "x": 7.5,
+      "y": 13,
+      "rot": 0
     },
     {
       "name": "Table 4",
@@ -96,7 +106,10 @@
         "Rimi Abuaita",
         "Saher Ibrahim",
         "Angie Ibrahim"
-      ]
+      ],
+      "x": 16.5,
+      "y": 13,
+      "rot": 0
     },
     {
       "name": "Table 5",
@@ -111,7 +124,10 @@
         "Vera Daoud",
         "Tony Daoud",
         "Amanda Daoud"
-      ]
+      ],
+      "x": 25.5,
+      "y": 13,
+      "rot": 0
     },
     {
       "name": "Table 6",
@@ -126,7 +142,10 @@
         "Imad Qassis",
         "Sana Qassis",
         "Suhaila Abuaita"
-      ]
+      ],
+      "x": 34.5,
+      "y": 13,
+      "rot": 0
     },
     {
       "name": "Table 7",
@@ -140,7 +159,10 @@
         "Ameera Farah",
         "Issa Abufarha",
         "Chelsy Abufarha"
-      ]
+      ],
+      "x": 43.5,
+      "y": 13,
+      "rot": 0
     },
     {
       "name": "Table 8",
@@ -157,7 +179,10 @@
         "Daniella Perez",
         "Hanna Moussa",
         "Alondra Haddad"
-      ]
+      ],
+      "x": 52.5,
+      "y": 13,
+      "rot": 0
     },
     {
       "name": "Table 9",
@@ -171,7 +196,10 @@
         "Patrick Patrus",
         "Maya Halloun",
         "Angelina Abufarha"
-      ]
+      ],
+      "x": 7.5,
+      "y": 22,
+      "rot": 0
     },
     {
       "name": "Table 10",
@@ -185,7 +213,10 @@
         "Amal Hayek",
         "Wael Hayek",
         "Kholoud Hayek"
-      ]
+      ],
+      "x": 16.5,
+      "y": 22,
+      "rot": 0
     },
     {
       "name": "Table 11",
@@ -199,7 +230,10 @@
         "Manal Abuaita",
         "George Abuaita",
         "Amal Abuaita"
-      ]
+      ],
+      "x": 25.5,
+      "y": 22,
+      "rot": 0
     },
     {
       "name": "Table 12",
@@ -215,7 +249,10 @@
         "Mary Rishmawi",
         "Mousa Rishmawi",
         "Amanda Rishmawi"
-      ]
+      ],
+      "x": 12.5,
+      "y": 32,
+      "rot": 0
     },
     {
       "name": "Table 13",
@@ -230,7 +267,10 @@
         "Ghada Yacoub",
         "Amira Hanna",
         "Elias Hanna"
-      ]
+      ],
+      "x": 43.5,
+      "y": 22,
+      "rot": 0
     },
     {
       "name": "Table 14",
@@ -245,8 +285,36 @@
         "Maha Alqazaha",
         "Fr. Amin Houli",
         "Rania Houli"
-      ]
+      ],
+      "x": 52.5,
+      "y": 22,
+      "rot": 0
     }
   ],
-  "unseated": []
+  "unseated": [],
+  "room": {
+    "width": 60,
+    "length": 40
+  },
+  "features": [
+    {
+      "id": "f1",
+      "label": "Dance floor",
+      "x": 30,
+      "y": 32.5,
+      "w": 16,
+      "h": 12,
+      "rot": 0
+    },
+    {
+      "id": "f2",
+      "label": "Entrance",
+      "x": 30,
+      "y": 39.4,
+      "w": 6,
+      "h": 1,
+      "rot": 0
+    }
+  ],
+  "showPlan": false
 }
