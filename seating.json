@@ -38,7 +38,7 @@
         "Rana Tannous",
         "Samer Ghawi"
       ],
-      "x": 18,
+      "x": 24.5,
       "y": 28,
       "rot": 90
     },
@@ -71,7 +71,7 @@
         "Lena Ibrahim",
         "Mariela Ibrahim"
       ],
-      "x": 31.5,
+      "x": 36,
       "y": 27.5,
       "rot": 90
     },
@@ -88,8 +88,8 @@
         "Laila Shahla",
         "Nour Ishak"
       ],
-      "x": 10.5,
-      "y": 18,
+      "x": 15,
+      "y": 18.5,
       "rot": 0
     },
     {
@@ -107,8 +107,8 @@
         "Saher Ibrahim",
         "Angie Ibrahim"
       ],
-      "x": 4,
-      "y": 25.5,
+      "x": 45.5,
+      "y": 19,
       "rot": 0
     },
     {
@@ -125,8 +125,8 @@
         "Tony Daoud",
         "Amanda Daoud"
       ],
-      "x": 45.5,
-      "y": 53,
+      "x": 5.5,
+      "y": 23,
       "rot": 0
     },
     {
@@ -143,8 +143,8 @@
         "Sana Qassis",
         "Suhaila Abuaita"
       ],
-      "x": 21.5,
-      "y": 54,
+      "x": 43,
+      "y": 46,
       "rot": 0
     },
     {
@@ -160,8 +160,8 @@
         "Issa Abufarha",
         "Chelsy Abufarha"
       ],
-      "x": 4.5,
-      "y": 47,
+      "x": 15.5,
+      "y": 28,
       "rot": 0
     },
     {
@@ -231,8 +231,8 @@
         "George Abuaita",
         "Amal Abuaita"
       ],
-      "x": 44.5,
-      "y": 37,
+      "x": 33,
+      "y": 46.5,
       "rot": 0
     },
     {
@@ -268,8 +268,8 @@
         "Amira Hanna",
         "Elias Hanna"
       ],
-      "x": 34.5,
-      "y": 46.5,
+      "x": 46,
+      "y": 54.5,
       "rot": 0
     },
     {
@@ -293,14 +293,14 @@
   ],
   "unseated": [],
   "room": {
-    "width": 50,
-    "length": 60
+    "width": 60,
+    "length": 70
   },
   "features": [
     {
       "id": "f1",
       "label": "Dance floor",
-      "x": 24.5,
+      "x": 30,
       "y": 6.5,
       "w": 16,
       "h": 12,
@@ -309,8 +309,8 @@
     {
       "id": "f2",
       "label": "Entrance",
-      "x": 48,
-      "y": 56,
+      "x": 57.5,
+      "y": 65.5,
       "w": 6,
       "h": 1,
       "rot": 90
