@@ -40,13 +40,25 @@
     },
     {
       "name": "Head Table 2",
-      "seats": 24,
+      "seats": 8,
       "guests": []
     },
     {
       "name": "Table 3",
       "seats": 8,
-      "guests": []
+      "guests": [
+        "Thomas Menegotti",
+        "George Baqileh",
+        "Saro Karimi",
+        "Faizan Khan",
+        "Rayan Pasha",
+        "Fadi El-Chaer",
+        "Maria Morcos",
+        "Scott Shacker",
+        "Daniella Perez",
+        "Hanna Moussa",
+        "Alondra Haddad"
+      ]
     },
     {
       "name": "Table 4",
