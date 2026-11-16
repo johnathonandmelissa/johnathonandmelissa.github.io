@@ -136,6 +136,7 @@ footer{display:flex;justify-content:center}
 .hnames:empty::before{content:"No guests yet. Drag someone here.";color:var(--muted);font-style:italic;font-size:14px}
 .drag-ghost{opacity:.35}
 .drag-chosen{background:var(--wine);border-radius:8px}
+.sortable-fallback{background:var(--wine);border-radius:8px;opacity:.95}
 </style>
 </head>
 <body>
@@ -222,7 +223,7 @@ footer{display:flex;justify-content:center}
   function initDrag(){
     if(!window.Sortable) return;
     document.querySelectorAll("ul.hnames").forEach(function(ul){
-      Sortable.create(ul,{group:"guests",handle:".drag",animation:150,ghostClass:"drag-ghost",chosenClass:"drag-chosen",emptyInsertThreshold:24,
+      Sortable.create(ul,{group:"guests",handle:".drag",animation:150,forceFallback:true,fallbackOnBody:true,fallbackTolerance:3,ghostClass:"drag-ghost",chosenClass:"drag-chosen",emptyInsertThreshold:24,
         onEnd:function(evt){
           var from=listFor(evt.from.getAttribute("data-t")), to=listFor(evt.to.getAttribute("data-t"));
           if(!from||!to||(from===to&&evt.oldIndex===evt.newIndex)) return;
