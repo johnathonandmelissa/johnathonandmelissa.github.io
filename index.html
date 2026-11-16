@@ -87,6 +87,19 @@ footer{display:flex;justify-content:center}
 .dt{color:var(--gold);white-space:nowrap;font-size:14px;font-variant-numeric:tabular-nums}
 .letter li.me{background:var(--wine);box-shadow:0 0 0 1px var(--gold)}
 .letter li.me .dn{font-weight:600}
+.plan{width:100%;height:auto;display:block}
+.plan .room{fill:rgba(0,0,0,.12);stroke:var(--gold);stroke-width:.15}
+.plan .gridl{stroke:rgba(255,255,255,.08);stroke-width:.06}
+.plan .tb{fill:var(--ink);stroke:var(--gold);stroke-width:.12}
+.plan .seat{fill:var(--gold);opacity:.85}
+.plan .tl{fill:#3a4426;font-family:var(--display);font-weight:600;text-anchor:middle;pointer-events:none}
+.plan .hi .tb{fill:var(--wine)}
+.plan .hi .tl{fill:var(--ink)}
+.plan .feat rect{fill:rgba(255,255,255,.07);stroke:var(--gold);stroke-width:.12;stroke-dasharray:.5 .4}
+.plan .fl{fill:var(--ink);font-style:italic;text-anchor:middle;font-family:var(--body);pointer-events:none}
+.plan-wrap{border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+.plan-guest .plan-wrap{padding:10px}
+.plan-hint{margin:8px 0 0;color:var(--muted);font-size:13px;text-align:center}
 </style>
 </head>
 <body>
@@ -111,6 +124,7 @@ footer{display:flex;justify-content:center}
     document.title="Find Your Seat · "+e.title;
     app.innerHTML='<main class="wrap"><header class="hero"><p class="eyebrow">'+esc(e.subtitle)+'</p><h1>'+esc(e.title).replace("&amp;",'<span class="amp">&amp;</span>')+'</h1><p class="date">'+esc(e.date)+(e.place?' · '+esc(e.place):'')+'</p><div class="rule" aria-hidden="true"><span></span></div>'+(data.example?'<span class="sample-pill">Preview with sample names</span>':'')+'</header>'+
       '<section class="finder"><label for="q">Find your seat</label><input id="q" class="search" type="search" placeholder="Type your first or last name" autocomplete="off" autocapitalize="words" enterkeyhint="search"><div id="results" class="results" aria-live="polite"></div></section>'+
+      (data.showPlan?'<section aria-labelledby="plan-h" class="plan-guest"><h2 id="plan-h" class="section-h">Floor plan</h2><div class="plan-wrap"><div id="plan"></div></div><p class="plan-hint">Search your name above and your table lights up.</p></section>':'')+
       '<section aria-labelledby="all-h"><h2 id="all-h" class="section-h">All guests · A to Z by last name</h2><div id="grid" class="dir"></div></section></main>';
     var q=document.getElementById("q");
     q.addEventListener("input",function(){query=q.value;update();});
@@ -122,6 +136,8 @@ footer{display:flex;justify-content:center}
     var res="";
     if(norm(query).length>=2) res=m.length?m.map(function(x){return '<div class="result"><span class="r-name">'+esc(x.name)+'</span><span class="r-label">is seated at</span><span class="r-table">'+esc(x.table.name)+'</span></div>';}).join(""):'<p class="nomatch">No match for “'+esc(query)+'”. Try your last name, or ask one of the hosts.</p>';
     document.getElementById("results").innerHTML=res;
+    var pl=document.getElementById("plan");
+    if(pl){ var hi={}; m.forEach(function(x){hi["i:"+x.ti]=1;}); pl.innerHTML=planSVG(data,{keyOf:function(t,i){return "i:"+i;},hi:hi}); }
     var all=[];
     data.tables.forEach(function(t,ti){ t.guests.forEach(function(g){ all.push({name:g,table:t.name,ti:ti,key:lastKey(g)}); }); });
     all.sort(function(a,b){ return a.key.localeCompare(b.key)||norm(a.name).localeCompare(norm(b.name)); });
@@ -133,8 +149,60 @@ footer{display:flex;justify-content:center}
       }).join("")+'</ul></section>';
     }).join("")||'<p class="empty">No guests yet</p>';
   }
+  /* ---------- Floor plan (shared) ---------- */
+  function isRect(t){ return t.shape ? t.shape==="rect" : (/head/i.test(t.name||"") || (Number(t.seats)||0)>=16); }
+  function tableDims(t){
+    var n=Math.max(1,Number(t.seats)||8);
+    if(isRect(t)) return [Math.max(8,Math.ceil(n/2)*2),3.5];
+    var d=n<=8?5:(n<=10?6:(n<=12?7:8)); return [d,d];
+  }
+  function ensureLayout(d){
+    d.room=d.room||{width:60,length:40};
+    var W=Number(d.room.width)||60, L=Number(d.room.length)||40;
+    var missing=d.tables.filter(function(t){return typeof t.x!=="number"||typeof t.y!=="number";});
+    if(missing.length&&missing.length===d.tables.length){
+      var heads=d.tables.filter(isRect), rounds=d.tables.filter(function(t){return !isRect(t);});
+      var total=heads.reduce(function(s,t){return s+tableDims(t)[0];},0)+Math.max(0,heads.length-1)*3;
+      var x=Math.max(1,(W-total)/2);
+      heads.forEach(function(t){var w=tableDims(t)[0]; t.x=Math.min(W,x+w/2); t.y=4; t.rot=0; x+=w+3;});
+      var cols=Math.max(1,Math.floor((W-4)/9)), startX=(W-(cols-1)*9)/2;
+      rounds.forEach(function(t,i){ t.x=startX+(i%cols)*9; t.y=Math.min(L,13+Math.floor(i/cols)*9); t.rot=0; });
+    } else {
+      missing.forEach(function(t,k){ t.x=Math.min(W,W/2+k*2); t.y=Math.min(L,L/2+k*2); t.rot=0; });
+    }
+    if(!d.features) d.features=[{id:"f1",label:"Dance floor",x:W/2,y:Math.max(6,L-8),w:16,h:12,rot:0},{id:"f2",label:"Entrance",x:W/2,y:L-0.6,w:6,h:1,rot:0}];
+  }
+  function planSVG(d,o){
+    var W=Number(d.room.width)||60, L=Number(d.room.length)||40, h=[];
+    h.push('<svg class="plan" viewBox="-2 -2 '+(W+4)+' '+(L+4)+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Floor plan of the room">');
+    h.push('<rect class="room" x="0" y="0" width="'+W+'" height="'+L+'" rx="0.4"/>');
+    for(var gx=5;gx<W;gx+=5) h.push('<line class="gridl" x1="'+gx+'" y1="0" x2="'+gx+'" y2="'+L+'"/>');
+    for(var gy=5;gy<L;gy+=5) h.push('<line class="gridl" x1="0" y1="'+gy+'" x2="'+W+'" y2="'+gy+'"/>');
+    (d.features||[]).forEach(function(f){
+      var k="f:"+f.id, rw=f.rot?f.h:f.w, rh=f.rot?f.w:f.h, fs=Math.min(1.2,Math.max(0.6,Math.min(rw,rh)*0.45));
+      h.push('<g class="pi feat'+(o.sel===k?' sel':'')+'" data-k="'+esc(k)+'" transform="translate('+f.x+' '+f.y+')"><rect x="'+(-rw/2)+'" y="'+(-rh/2)+'" width="'+rw+'" height="'+rh+'" rx="0.3"/><text class="fl" y="'+(fs*0.35)+'" font-size="'+fs+'">'+esc(f.label)+'</text></g>');
+    });
+    d.tables.forEach(function(t,i){
+      var k=o.keyOf(t,i), dm=tableDims(t), n=Number(t.seats)||0, rect=isRect(t), seats="", shape, label, fs, inner;
+      if(rect){
+        var w=dm[0], hh=dm[1], per=Math.max(1,Math.ceil(n/2)), sp=w/per;
+        shape='<rect class="tb" x="'+(-w/2)+'" y="'+(-hh/2)+'" width="'+w+'" height="'+hh+'" rx="0.4"/>';
+        for(var s=0;s<n;s++){ var side=s<per?-1:1, idx=s<per?s:s-per; seats+='<circle class="seat" cx="'+(-w/2+sp*(idx+0.5)).toFixed(2)+'" cy="'+(side*(hh/2+0.75))+'" r="0.5"/>'; }
+        label=t.name; fs=1.5;
+        inner='<g transform="rotate('+(t.rot||0)+')">'+seats+shape+'<text class="tl" y="'+(fs*0.35)+'" font-size="'+fs+'">'+esc(label)+'</text></g>';
+      } else {
+        var r=dm[0]/2; shape='<circle class="tb" r="'+r+'"/>';
+        for(var s2=0;s2<n;s2++){ var a=2*Math.PI*s2/n-Math.PI/2; seats+='<circle class="seat" cx="'+((r+0.8)*Math.cos(a)).toFixed(2)+'" cy="'+((r+0.8)*Math.sin(a)).toFixed(2)+'" r="0.5"/>'; }
+        label=(t.name||"").replace(/^table\s*/i,""); fs=label.length>3?Math.min(1.3,dm[0]*1.6/Math.max(4,label.length)):2.2;
+        inner=seats+shape+'<text class="tl" y="'+(fs*0.35)+'" font-size="'+fs+'">'+esc(label)+'</text>';
+      }
+      h.push('<g class="pi tbl'+(o.hi&&o.hi[k]?' hi':'')+(o.sel===k?' sel':'')+'" data-k="'+esc(k)+'" transform="translate('+t.x+' '+t.y+')"><title>'+esc(t.name)+'</title>'+inner+'</g>');
+    });
+    h.push('</svg>');
+    return h.join("");
+  }
   function lastKey(n){ var p=norm(n).split(" "); return p[p.length-1]||""; }
-  fetch("seating.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){data=d;render();})
+  fetch("seating.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){data=d;ensureLayout(data);render();})
     .catch(function(){app.innerHTML='<main class="wrap"><p class="loading">The seating chart couldn’t load. Check your connection and refresh, or ask one of the hosts.</p></main>';});
 })();
 </script>

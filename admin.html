@@ -137,6 +137,25 @@ footer{display:flex;justify-content:center}
 .drag-ghost{opacity:.35}
 .drag-chosen{background:var(--wine);border-radius:8px}
 .sortable-fallback{background:var(--wine);border-radius:8px;opacity:.95}
+.plan{width:100%;height:auto;display:block}
+.plan .room{fill:rgba(0,0,0,.12);stroke:var(--gold);stroke-width:.15}
+.plan .gridl{stroke:rgba(255,255,255,.08);stroke-width:.06}
+.plan .tb{fill:var(--ink);stroke:var(--gold);stroke-width:.12}
+.plan .seat{fill:var(--gold);opacity:.85}
+.plan .tl{fill:#3a4426;font-family:var(--display);font-weight:600;text-anchor:middle;pointer-events:none}
+.plan .hi .tb{fill:var(--wine)}
+.plan .hi .tl{fill:var(--ink)}
+.plan .feat rect{fill:rgba(255,255,255,.07);stroke:var(--gold);stroke-width:.12;stroke-dasharray:.5 .4}
+.plan .fl{fill:var(--ink);font-style:italic;text-anchor:middle;font-family:var(--body);pointer-events:none}
+.plan-wrap{border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--surface);display:flex;flex-direction:column;gap:10px}
+.plan .pi{cursor:grab}
+.plan .sel .tb,.plan .sel rect{stroke:#fff;stroke-width:.35}
+.plan-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.plan-tools .input{width:76px;padding:6px 8px}
+.plan-sel{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:38px;padding:6px 10px;border-radius:10px;background:var(--bg);font-size:14px}
+.plan-sel .input{width:76px;padding:5px 8px}
+.plan-sel .lbl{width:160px}
+.btn.on{background:var(--wine);color:var(--wine-ink);border-color:var(--gold)}
 </style>
 </head>
 <body>
@@ -149,7 +168,8 @@ footer{display:flex;justify-content:center}
   var API="https://api.github.com/repos/"+OWNER+"/"+REPO+"/contents/"+PATH;
   var TOKEN_KEY="seating-admin-token";
   var app=document.getElementById("app");
-  var token=null, sha=null, saved=null, draft=null, dirty=false, status=null, importOpen=false, saving=false;
+  var token=null, sha=null, saved=null, draft=null, dirty=false, status=null, importOpen=false, saving=false, view="tables", selected=null;
+  var FEAT_SIZES={"Dance floor":[16,16],"DJ":[8,4],"Bar":[12,3],"Entrance":[6,1],"Buffet":[16,3],"Cake":[4,4]};
 
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
   function uid(){return "t"+Math.random().toString(36).slice(2,9);}
@@ -166,7 +186,9 @@ footer{display:flex;justify-content:center}
   }
   function normalize(d){
     d.event=d.event||{title:"",subtitle:"",date:"",place:""};
-    d.tables=(d.tables||[]).map(function(t){return {id:t.id||uid(),name:t.name||"Table",seats:Number(t.seats)||8,guests:(t.guests||[]).slice()};});
+    d.tables=(d.tables||[]).map(function(t){var o={id:t.id||uid(),name:t.name||"Table",seats:Number(t.seats)||8,guests:(t.guests||[]).slice()};
+      if(typeof t.x==="number") o.x=t.x; if(typeof t.y==="number") o.y=t.y; o.rot=t.rot||0; if(t.shape) o.shape=t.shape; return o;});
+    if(d.features) d.features=d.features.map(function(f){f.id=f.id||uid(); f.rot=f.rot||0; return f;});
     d.unseated=(d.unseated||[]).slice();
     return d;
   }
@@ -234,6 +256,117 @@ footer{display:flex;justify-content:center}
   function addForm(id){ return '<form class="add" data-t="'+esc(id)+'"><input id="add-'+esc(id)+'" class="input" placeholder="Add guest (commas for several)" autocomplete="off"><button class="btn small" type="submit">Add</button></form>'; }
   function toText(d){ var l=d.tables.map(function(t){return t.name+": "+t.guests.join(", ");}); if(d.unseated.length) l.push(d.unseated.join(", ")); return l.join("\n"); }
 
+  /* ---------- Floor plan (shared) ---------- */
+  function isRect(t){ return t.shape ? t.shape==="rect" : (/head/i.test(t.name||"") || (Number(t.seats)||0)>=16); }
+  function tableDims(t){
+    var n=Math.max(1,Number(t.seats)||8);
+    if(isRect(t)) return [Math.max(8,Math.ceil(n/2)*2),3.5];
+    var d=n<=8?5:(n<=10?6:(n<=12?7:8)); return [d,d];
+  }
+  function ensureLayout(d){
+    d.room=d.room||{width:60,length:40};
+    var W=Number(d.room.width)||60, L=Number(d.room.length)||40;
+    var missing=d.tables.filter(function(t){return typeof t.x!=="number"||typeof t.y!=="number";});
+    if(missing.length&&missing.length===d.tables.length){
+      var heads=d.tables.filter(isRect), rounds=d.tables.filter(function(t){return !isRect(t);});
+      var total=heads.reduce(function(s,t){return s+tableDims(t)[0];},0)+Math.max(0,heads.length-1)*3;
+      var x=Math.max(1,(W-total)/2);
+      heads.forEach(function(t){var w=tableDims(t)[0]; t.x=Math.min(W,x+w/2); t.y=4; t.rot=0; x+=w+3;});
+      var cols=Math.max(1,Math.floor((W-4)/9)), startX=(W-(cols-1)*9)/2;
+      rounds.forEach(function(t,i){ t.x=startX+(i%cols)*9; t.y=Math.min(L,13+Math.floor(i/cols)*9); t.rot=0; });
+    } else {
+      missing.forEach(function(t,k){ t.x=Math.min(W,W/2+k*2); t.y=Math.min(L,L/2+k*2); t.rot=0; });
+    }
+    if(!d.features) d.features=[{id:"f1",label:"Dance floor",x:W/2,y:Math.max(6,L-8),w:16,h:12,rot:0},{id:"f2",label:"Entrance",x:W/2,y:L-0.6,w:6,h:1,rot:0}];
+  }
+  function planSVG(d,o){
+    var W=Number(d.room.width)||60, L=Number(d.room.length)||40, h=[];
+    h.push('<svg class="plan" viewBox="-2 -2 '+(W+4)+' '+(L+4)+'" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Floor plan of the room">');
+    h.push('<rect class="room" x="0" y="0" width="'+W+'" height="'+L+'" rx="0.4"/>');
+    for(var gx=5;gx<W;gx+=5) h.push('<line class="gridl" x1="'+gx+'" y1="0" x2="'+gx+'" y2="'+L+'"/>');
+    for(var gy=5;gy<L;gy+=5) h.push('<line class="gridl" x1="0" y1="'+gy+'" x2="'+W+'" y2="'+gy+'"/>');
+    (d.features||[]).forEach(function(f){
+      var k="f:"+f.id, rw=f.rot?f.h:f.w, rh=f.rot?f.w:f.h, fs=Math.min(1.2,Math.max(0.6,Math.min(rw,rh)*0.45));
+      h.push('<g class="pi feat'+(o.sel===k?' sel':'')+'" data-k="'+esc(k)+'" transform="translate('+f.x+' '+f.y+')"><rect x="'+(-rw/2)+'" y="'+(-rh/2)+'" width="'+rw+'" height="'+rh+'" rx="0.3"/><text class="fl" y="'+(fs*0.35)+'" font-size="'+fs+'">'+esc(f.label)+'</text></g>');
+    });
+    d.tables.forEach(function(t,i){
+      var k=o.keyOf(t,i), dm=tableDims(t), n=Number(t.seats)||0, rect=isRect(t), seats="", shape, label, fs, inner;
+      if(rect){
+        var w=dm[0], hh=dm[1], per=Math.max(1,Math.ceil(n/2)), sp=w/per;
+        shape='<rect class="tb" x="'+(-w/2)+'" y="'+(-hh/2)+'" width="'+w+'" height="'+hh+'" rx="0.4"/>';
+        for(var s=0;s<n;s++){ var side=s<per?-1:1, idx=s<per?s:s-per; seats+='<circle class="seat" cx="'+(-w/2+sp*(idx+0.5)).toFixed(2)+'" cy="'+(side*(hh/2+0.75))+'" r="0.5"/>'; }
+        label=t.name; fs=1.5;
+        inner='<g transform="rotate('+(t.rot||0)+')">'+seats+shape+'<text class="tl" y="'+(fs*0.35)+'" font-size="'+fs+'">'+esc(label)+'</text></g>';
+      } else {
+        var r=dm[0]/2; shape='<circle class="tb" r="'+r+'"/>';
+        for(var s2=0;s2<n;s2++){ var a=2*Math.PI*s2/n-Math.PI/2; seats+='<circle class="seat" cx="'+((r+0.8)*Math.cos(a)).toFixed(2)+'" cy="'+((r+0.8)*Math.sin(a)).toFixed(2)+'" r="0.5"/>'; }
+        label=(t.name||"").replace(/^table\s*/i,""); fs=label.length>3?Math.min(1.3,dm[0]*1.6/Math.max(4,label.length)):2.2;
+        inner=seats+shape+'<text class="tl" y="'+(fs*0.35)+'" font-size="'+fs+'">'+esc(label)+'</text>';
+      }
+      h.push('<g class="pi tbl'+(o.hi&&o.hi[k]?' hi':'')+(o.sel===k?' sel':'')+'" data-k="'+esc(k)+'" transform="translate('+t.x+' '+t.y+')"><title>'+esc(t.name)+'</title>'+inner+'</g>');
+    });
+    h.push('</svg>');
+    return h.join("");
+  }
+
+  function objFor(k){ if(!k) return null; var id=k.slice(2);
+    if(k.charAt(0)==="t") return draft.tables.find(function(t){return t.id===id;})||null;
+    return (draft.features||[]).find(function(f){return f.id===id;})||null; }
+  function planSection(){
+    ensureLayout(draft);
+    var r=draft.room, k=selected, o=objFor(k), sel;
+    if(!o){ selected=null; sel='<span class="hint">Drag tables and room items to move them. Click one to rotate, resize or remove it.</span>'; }
+    else if(k.charAt(0)==="t"){
+      sel='<b>'+esc(o.name)+'</b><span>'+o.guests.length+' guests · '+o.seats+' seats</span><span class="spacer"></span>'+
+        '<button type="button" class="btn small" data-act="p-rotate">Rotate</button>'+
+        '<button type="button" class="btn small" data-act="p-shape">'+(isRect(o)?'Make round':'Make rectangular')+'</button>'+
+        '<button type="button" class="btn small" data-act="p-done">Done</button>';
+    } else {
+      sel='<label for="f-lbl">Label</label><input id="f-lbl" class="input lbl f-edit" data-k="label" value="'+esc(o.label)+'">'+
+        '<label for="f-w">Size</label><input id="f-w" class="input f-edit" data-k="w" type="number" min="1" max="200" step="0.5" value="'+o.w+'"> × '+
+        '<input id="f-h" class="input f-edit" data-k="h" type="number" min="1" max="200" step="0.5" value="'+o.h+'" aria-label="Length"> ft<span class="spacer"></span>'+
+        '<button type="button" class="btn small" data-act="p-rotate">Rotate</button>'+
+        '<button type="button" class="btn small" data-act="p-remove">Remove</button>'+
+        '<button type="button" class="btn small" data-act="p-done">Done</button>';
+    }
+    return '<section class="plan-wrap">'+
+      '<div class="plan-tools"><label for="room-w">Room</label><input id="room-w" class="input rm" data-k="width" type="number" min="10" max="400" value="'+esc(r.width)+'"> ft wide ×'+
+      '<input id="room-l" class="input rm" data-k="length" type="number" min="10" max="400" value="'+esc(r.length)+'" aria-label="Room length"> ft long<span class="spacer"></span>'+
+      '<label class="check" for="showplan"><input id="showplan" type="checkbox"'+(draft.showPlan?' checked':'')+'> Show floor plan to guests</label></div>'+
+      '<div class="plan-tools">Add:'+Object.keys(FEAT_SIZES).map(function(n){return '<button type="button" class="btn small" data-act="p-add" data-label="'+esc(n)+'">'+esc(n)+'</button>';}).join("")+
+      '<input id="feat-label" class="input" style="width:140px" placeholder="Other item"><button type="button" class="btn small" data-act="p-add-custom">Add</button></div>'+
+      '<div class="plan-sel">'+sel+'</div>'+
+      '<div id="plan-host">'+planSVG(draft,{keyOf:function(t){return "t:"+t.id;},sel:selected})+'</div>'+
+      '<p class="hint">Each grid square is 5 × 5 ft. Head tables (or any table with 16+ seats) draw as rectangles; the rest are round.</p></section>';
+  }
+  function initPlanDrag(){
+    var svg=document.querySelector("#plan-host svg"); if(!svg) return;
+    var drag=null;
+    function pt(e){ var p=svg.createSVGPoint(); p.x=e.clientX; p.y=e.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
+    svg.addEventListener("pointerdown",function(e){
+      var g=e.target.closest(".pi");
+      if(!g){ if(selected){ selected=null; render(); } return; }
+      var k=g.getAttribute("data-k"), o=objFor(k); if(!o) return;
+      var p=pt(e); drag={g:g,k:k,o:o,dx:p.x-o.x,dy:p.y-o.y,x:o.x,y:o.y,moved:false};
+      try{ svg.setPointerCapture(e.pointerId); }catch(_){}
+      e.preventDefault();
+    });
+    svg.addEventListener("pointermove",function(e){
+      if(!drag) return;
+      var p=pt(e), W=Number(draft.room.width)||60, L=Number(draft.room.length)||40;
+      var nx=Math.max(0,Math.min(W,Math.round((p.x-drag.dx)*2)/2)), ny=Math.max(0,Math.min(L,Math.round((p.y-drag.dy)*2)/2));
+      if(nx!==drag.x||ny!==drag.y){ drag.x=nx; drag.y=ny; drag.moved=true; drag.g.setAttribute("transform","translate("+nx+" "+ny+")"); }
+    });
+    function end(){ if(!drag) return; var d=drag; drag=null; selected=d.k;
+      if(d.moved){ d.o.x=d.x; d.o.y=d.y; changed(); } else render(); }
+    svg.addEventListener("pointerup",end); svg.addEventListener("pointercancel",end);
+  }
+  function addFeature(label){
+    ensureLayout(draft);
+    var sz=FEAT_SIZES[label]||[8,4], f={id:uid(),label:label,x:Number(draft.room.width)/2,y:Number(draft.room.length)/2,w:sz[0],h:sz[1],rot:0};
+    draft.features.push(f); selected="f:"+f.id; changed();
+  }
+
   function render(){
     var focusId=document.activeElement&&document.activeElement.id;
     var seated=draft.tables.reduce(function(n,t){return n+t.guests.length;},0);
@@ -243,6 +376,8 @@ footer{display:flex;justify-content:center}
       '<span class="stats">'+seated+' seated · '+draft.unseated.length+' not seated · '+draft.tables.length+' tables · '+seats+' seats</span>'+
       (dirty?'<span class="chip">Unsaved changes</span>':'')+'<span class="spacer"></span>'+
       '<a class="btn" href="./" target="_blank" rel="noopener">Guest page</a>'+
+      '<button type="button" class="btn'+(view==="tables"?' on':'')+'" data-act="view-tables">Tables</button>'+
+      '<button type="button" class="btn'+(view==="plan"?' on':'')+'" data-act="view-plan">Floor plan</button>'+
       '<button type="button" class="btn" data-act="import-open">Paste a list</button>'+
       '<button type="button" class="btn" data-act="copy">Copy as text</button>'+
       (dirty?'<button type="button" class="btn" data-act="discard">Discard changes</button>':'<button type="button" class="btn" data-act="logout">Sign out</button>')+
@@ -256,6 +391,7 @@ footer{display:flex;justify-content:center}
         '<textarea id="imp" class="input">'+esc(toText(draft))+'</textarea>'+
         '<div class="row"><button type="button" class="btn primary" data-act="import-apply">Replace tables with this list</button><button type="button" class="btn" data-act="import-cancel">Cancel</button></div></section>';
     }
+    if(view==="plan"){ h+=planSection()+'</main>'; } else {
     h+='<section class="event-fields">'+['title','subtitle','date','place'].map(function(k){
       var label={title:"Names",subtitle:"Event",date:"Date",place:"Place"}[k];
       return '<label class="field" for="ev-'+k+'">'+label+'<input id="ev-'+k+'" class="input ev" data-k="'+k+'" value="'+esc(e[k]||"")+'"></label>';
@@ -270,8 +406,9 @@ footer{display:flex;justify-content:center}
       '<article class="card host pool"><div class="card-head"><h3>Not seated</h3><span class="cap">'+draft.unseated.length+'</span></div><p class="hint">Hidden from guests. Removed tables send their guests here.</p>'+
       guestRows("__unseated",draft.unseated)+addForm("__unseated")+'</article>'+
       '<button type="button" class="addtable" data-act="add-table">+ Add a table</button></div></main>';
+    }
     app.innerHTML=h;
-    initDrag();
+    if(view==="plan") initPlanDrag(); else initDrag();
     if(focusId){var f=document.getElementById(focusId); if(f) f.focus();}
   }
   function changed(){ dirty=true; status=null; render(); }
@@ -292,7 +429,8 @@ footer{display:flex;justify-content:center}
     if(saving||!dirty) return;
     saving=true; render();
     var out=clone(draft); out.example=false;
-    out.tables=out.tables.map(function(t){return {name:t.name,seats:t.seats,guests:t.guests};});
+    ensureLayout(out);
+    out.tables=out.tables.map(function(t){var o={name:t.name,seats:t.seats,guests:t.guests,x:t.x,y:t.y,rot:t.rot||0}; if(t.shape) o.shape=t.shape; return o;});
     gh("PUT",{message:"Update seating chart",content:b64encode(JSON.stringify(out,null,2)+"\n"),sha:sha,branch:BRANCH})
       .then(function(j){ sha=j.content.sha; saving=false; draft.example=false; saved=clone(draft); dirty=false;
         status={kind:"ok",text:"Saved. The guest page updates within a few minutes. Guests who already have it open may need to refresh."}; render(); })
@@ -308,6 +446,13 @@ footer{display:flex;justify-content:center}
     var act=b.getAttribute("data-act"), id=b.getAttribute("data-t");
     if(act==="login") return login();
     if(act==="save") return save();
+    if(act==="view-tables"||act==="view-plan"){ view=act==="view-plan"?"plan":"tables"; selected=null; render(); window.scrollTo(0,0); return; }
+    if(act==="p-add") return addFeature(b.getAttribute("data-label"));
+    if(act==="p-add-custom"){ var fl=document.getElementById("feat-label").value.trim(); if(fl) addFeature(fl); return; }
+    if(act==="p-done"){ selected=null; return render(); }
+    if(act==="p-rotate"){ var po=objFor(selected); if(po){ po.rot=po.rot?0:90; changed(); } return; }
+    if(act==="p-shape"){ var pt2=objFor(selected); if(pt2){ pt2.shape=isRect(pt2)?"round":"rect"; changed(); } return; }
+    if(act==="p-remove"){ var fid=selected&&selected.slice(2); draft.features=(draft.features||[]).filter(function(f){return f.id!==fid;}); selected=null; changed(); return; }
     if(act==="logout"){ lsSet(TOKEN_KEY,null); token=null; return renderLogin(); }
     if(act==="discard"){ draft=clone(saved); dirty=false; status=null; return render(); }
     if(act==="import-open"){ importOpen=true; render(); var t=document.getElementById("imp"); if(t) t.focus(); return; }
@@ -331,6 +476,11 @@ footer{display:flex;justify-content:center}
   });
   app.addEventListener("change",function(ev){
     if(!draft) return;
+    var pe=ev.target;
+    if(pe.classList.contains("rm")){ ensureLayout(draft); draft.room[pe.getAttribute("data-k")]=Math.max(10,Math.min(400,Number(pe.value)||60)); changed(); return; }
+    if(pe.id==="showplan"){ draft.showPlan=pe.checked; changed(); return; }
+    if(pe.classList.contains("f-edit")){ var fo=objFor(selected); if(fo){ var fk=pe.getAttribute("data-k");
+      if(fk==="label"){ if(pe.value.trim()) fo.label=pe.value.trim(); } else fo[fk]=Math.max(1,Math.min(200,Number(pe.value)||1)); changed(); } return; }
     var el=ev.target, id=el.getAttribute("data-t");
     if(el.classList.contains("t-name")){ var t=draft.tables.find(function(x){return x.id===id;}); if(t){ t.name=el.value.trim()||t.name; changed(); } }
     else if(el.classList.contains("t-seats")){ var t2=draft.tables.find(function(x){return x.id===id;}); if(t2){ t2.seats=Math.max(1,Math.min(40,parseInt(el.value,10)||1)); changed(); } }
