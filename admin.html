@@ -278,6 +278,14 @@ footer{display:flex;justify-content:center}
       missing.forEach(function(t,k){ t.x=Math.min(W,W/2+k*2); t.y=Math.min(L,L/2+k*2); t.rot=0; });
     }
     if(!d.features) d.features=[{id:"f1",label:"Dance floor",x:W/2,y:Math.max(6,L-8),w:16,h:12,rot:0},{id:"f2",label:"Entrance",x:W/2,y:L-0.6,w:6,h:1,rot:0}];
+    keepInRoom(d);
+  }
+  function keepInRoom(d){
+    var W=Number(d.room.width)||60, L=Number(d.room.length)||40;
+    function clamp(o,w,h){ var hw=Math.min(w/2,W/2), hh=Math.min(h/2,L/2);
+      o.x=Math.max(hw,Math.min(W-hw,Number(o.x)||0)); o.y=Math.max(hh,Math.min(L-hh,Number(o.y)||0)); }
+    d.tables.forEach(function(t){ var dm=tableDims(t), pad=isRect(t)?1.3:1.3, w=dm[0]+(isRect(t)?0:pad*2), h=dm[1]+pad*2; if(t.rot){ var tmp=w; w=h; h=tmp; } clamp(t,w,h); });
+    (d.features||[]).forEach(function(f){ clamp(f,f.rot?f.h:f.w,f.rot?f.w:f.h); });
   }
   function planSVG(d,o){
     var W=Number(d.room.width)||60, L=Number(d.room.length)||40, h=[];
@@ -477,7 +485,7 @@ footer{display:flex;justify-content:center}
   app.addEventListener("change",function(ev){
     if(!draft) return;
     var pe=ev.target;
-    if(pe.classList.contains("rm")){ ensureLayout(draft); draft.room[pe.getAttribute("data-k")]=Math.max(10,Math.min(400,Number(pe.value)||60)); changed(); return; }
+    if(pe.classList.contains("rm")){ ensureLayout(draft); draft.room[pe.getAttribute("data-k")]=Math.max(10,Math.min(400,Number(pe.value)||60)); keepInRoom(draft); changed(); return; }
     if(pe.id==="showplan"){ draft.showPlan=pe.checked; changed(); return; }
     if(pe.classList.contains("f-edit")){ var fo=objFor(selected); if(fo){ var fk=pe.getAttribute("data-k");
       if(fk==="label"){ if(pe.value.trim()) fo.label=pe.value.trim(); } else fo[fk]=Math.max(1,Math.min(200,Number(pe.value)||1)); changed(); } return; }
