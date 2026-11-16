@@ -38,9 +38,9 @@
         "Rana Tannous",
         "Samer Ghawi"
       ],
-      "x": 16.5,
-      "y": 4,
-      "rot": 0
+      "x": 13.5,
+      "y": 29,
+      "rot": 90
     },
     {
       "name": "Head Table 2",
@@ -71,9 +71,9 @@
         "Lena Ibrahim",
         "Mariela Ibrahim"
       ],
-      "x": 44.5,
-      "y": 4,
-      "rot": 0
+      "x": 24.5,
+      "y": 29,
+      "rot": 90
     },
     {
       "name": "Table 3",
@@ -88,8 +88,8 @@
         "Laila Shahla",
         "Nour Ishak"
       ],
-      "x": 7.5,
-      "y": 13,
+      "x": 2.5,
+      "y": 18,
       "rot": 0
     },
     {
@@ -107,8 +107,8 @@
         "Saher Ibrahim",
         "Angie Ibrahim"
       ],
-      "x": 16.5,
-      "y": 13,
+      "x": 24.5,
+      "y": 6.5,
       "rot": 0
     },
     {
@@ -125,8 +125,8 @@
         "Tony Daoud",
         "Amanda Daoud"
       ],
-      "x": 25.5,
-      "y": 13,
+      "x": 33.5,
+      "y": 7,
       "rot": 0
     },
     {
@@ -144,7 +144,7 @@
         "Suhaila Abuaita"
       ],
       "x": 34.5,
-      "y": 13,
+      "y": 17,
       "rot": 0
     },
     {
@@ -160,8 +160,8 @@
         "Issa Abufarha",
         "Chelsy Abufarha"
       ],
-      "x": 43.5,
-      "y": 13,
+      "x": 8.5,
+      "y": 6.5,
       "rot": 0
     },
     {
@@ -197,8 +197,8 @@
         "Maya Halloun",
         "Angelina Abufarha"
       ],
-      "x": 7.5,
-      "y": 22,
+      "x": 3.5,
+      "y": 27.5,
       "rot": 0
     },
     {
@@ -214,8 +214,8 @@
         "Wael Hayek",
         "Kholoud Hayek"
       ],
-      "x": 16.5,
-      "y": 22,
+      "x": 34,
+      "y": 38.5,
       "rot": 0
     },
     {
@@ -231,8 +231,8 @@
         "George Abuaita",
         "Amal Abuaita"
       ],
-      "x": 25.5,
-      "y": 22,
+      "x": 36,
+      "y": 27.5,
       "rot": 0
     },
     {
@@ -250,8 +250,8 @@
         "Mousa Rishmawi",
         "Amanda Rishmawi"
       ],
-      "x": 12.5,
-      "y": 32,
+      "x": 4,
+      "y": 36,
       "rot": 0
     },
     {
@@ -268,8 +268,8 @@
         "Amira Hanna",
         "Elias Hanna"
       ],
-      "x": 43.5,
-      "y": 22,
+      "x": 4,
+      "y": 45.5,
       "rot": 0
     },
     {
@@ -293,15 +293,15 @@
   ],
   "unseated": [],
   "room": {
-    "width": 60,
-    "length": 40
+    "width": 40,
+    "length": 60
   },
   "features": [
     {
       "id": "f1",
       "label": "Dance floor",
-      "x": 30,
-      "y": 32.5,
+      "x": 20.5,
+      "y": 52,
       "w": 16,
       "h": 12,
       "rot": 0
@@ -309,11 +309,11 @@
     {
       "id": "f2",
       "label": "Entrance",
-      "x": 30,
-      "y": 39.4,
+      "x": 2.5,
+      "y": 3.5,
       "w": 6,
       "h": 1,
-      "rot": 0
+      "rot": 90
     }
   ],
   "showPlan": false
