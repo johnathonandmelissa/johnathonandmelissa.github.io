@@ -9,11 +9,36 @@
   "tables": [
     {
       "name": "Head Table 1",
+      "seats": 24,
+      "guests": [
+        "Habib Tannous",
+        "Nancy Tannous",
+        "Samuel Tannous",
+        "Caroline Tannous",
+        "Adam Tannous",
+        "Nabil Khaouli",
+        "Violet Khaouli",
+        "Mark Khaouli",
+        "Diana Khaouli",
+        "Nathalie Khaouli",
+        "Leonardo Khalouli",
+        "Nadim Tannous",
+        "Christina Tannous",
+        "Anthony Tannous"
+      ]
+    },
+    {
+      "name": "Head Table 2",
+      "seats": 24,
+      "guests": []
+    },
+    {
+      "name": "Table 3",
       "seats": 8,
       "guests": []
     },
     {
-      "name": "Head Table 2",
+      "name": "Table 4",
       "seats": 8,
       "guests": []
     },
@@ -24,6 +49,46 @@
     },
     {
       "name": "Table 6",
+      "seats": 8,
+      "guests": []
+    },
+    {
+      "name": "Table 7",
+      "seats": 8,
+      "guests": []
+    },
+    {
+      "name": "Table 8",
+      "seats": 8,
+      "guests": []
+    },
+    {
+      "name": "Table 9",
+      "seats": 8,
+      "guests": []
+    },
+    {
+      "name": "Table 10",
+      "seats": 8,
+      "guests": []
+    },
+    {
+      "name": "Table 11",
+      "seats": 8,
+      "guests": []
+    },
+    {
+      "name": "Table 12",
+      "seats": 8,
+      "guests": []
+    },
+    {
+      "name": "Table 13",
+      "seats": 8,
+      "guests": []
+    },
+    {
+      "name": "Table 14",
       "seats": 8,
       "guests": []
     }
