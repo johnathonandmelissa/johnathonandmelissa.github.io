@@ -70,6 +70,80 @@
     },
     {
       "name": "Table 3",
+      "seats": 8,
+      "guests": [
+        "Amany Rishmawi",
+        "Christina Rishmawi",
+        "Alyssa Isaac",
+        "Anabella Isaac",
+        "Jasmine Shahla",
+        "Giselle Shahla",
+        "Laila Shahla",
+        "Nour Ishak"
+      ]
+    },
+    {
+      "name": "Table 4",
+      "seats": 10,
+      "guests": [
+        "Michael Ibrahim",
+        "Jehan Ibrahim",
+        "Majdi Alkazaha",
+        "Rula Alkazaha",
+        "Maher Qazaha",
+        "Susan Qazaha",
+        "Amir Abuaita",
+        "Rimi Abuaita",
+        "Saher Ibrahim",
+        "Angie Ibrahim"
+      ]
+    },
+    {
+      "name": "Table 5",
+      "seats": 9,
+      "guests": [
+        "George Ishaq",
+        "Hiam Ishaq",
+        "Nidal Ishaq",
+        "Samer Ishaq",
+        "Issa Odeh",
+        "Issa Daoud",
+        "Vera Daoud",
+        "Tony Daoud",
+        "Amanda Daoud"
+      ]
+    },
+    {
+      "name": "Table 6",
+      "seats": 9,
+      "guests": [
+        "George Abuaita",
+        "Muna Abuaita",
+        "Jalal Abuaita",
+        "Mirna Abuaita",
+        "Suhail Abuaita",
+        "Abeer Abuaita",
+        "Imad Qassis",
+        "Sana Qassis",
+        "Suhaila Abuaita"
+      ]
+    },
+    {
+      "name": "Table 7",
+      "seats": 8,
+      "guests": [
+        "Samer Abdullah",
+        "Brittany Abdullah",
+        "Nasri Abdullah",
+        "Ghada Abdullah",
+        "Abdullah Farah",
+        "Ameera Farah",
+        "Issa Abufarha",
+        "Chelsy Abufarha"
+      ]
+    },
+    {
+      "name": "Table 8",
       "seats": 11,
       "guests": [
         "Thomas Menegotti",
@@ -86,37 +160,7 @@
       ]
     },
     {
-      "name": "Table 4",
-      "seats": 8,
-      "guests": [
-        "Amany Rishmawi",
-        "Christina Rishmawi",
-        "Alyssa Isaac",
-        "Anabella Isaac",
-        "Jasmine Shahla",
-        "Giselle Shahla",
-        "Laila Shahla",
-        "Nour Ishak"
-      ]
-    },
-    {
-      "name": "Table 5",
-      "seats": 10,
-      "guests": [
-        "Michael Ibrahim",
-        "Jehan Ibrahim",
-        "Majdi Alkazaha",
-        "Rula Alkazaha",
-        "Maher Qazaha",
-        "Susan Qazaha",
-        "Amir Abuaita",
-        "Rimi Abuaita",
-        "Saher Ibrahim",
-        "Angie Ibrahim"
-      ]
-    },
-    {
-      "name": "Table 6",
+      "name": "Table 9",
       "seats": 8,
       "guests": [
         "Andrew Alkazaha",
@@ -127,51 +171,6 @@
         "Patrick Patrus",
         "Maya Halloun",
         "Angelina Abufarha"
-      ]
-    },
-    {
-      "name": "Table 7",
-      "seats": 8,
-      "guests": [
-        "Khaled Abuaita",
-        "Sally Abuaita",
-        "Philip Abuaita",
-        "Janet Abuaita",
-        "Jamal Abuaita",
-        "Manal Abuaita",
-        "George Abuaita",
-        "Amal Abuaita"
-      ]
-    },
-    {
-      "name": "Table 8",
-      "seats": 9,
-      "guests": [
-        "George Abuaita",
-        "Muna Abuaita",
-        "Jalal Abuaita",
-        "Mirna Abuaita",
-        "Suhail Abuaita",
-        "Abeer Abuaita",
-        "Imad Qassis",
-        "Sana Qassis",
-        "Suhaila Abuaita"
-      ]
-    },
-    {
-      "name": "Table 9",
-      "seats": 10,
-      "guests": [
-        "Emil Abuaita",
-        "Eline Abuaita",
-        "Khader Abuaita",
-        "Lucy Abuaita",
-        "Nick Khoury",
-        "Mary Khoury",
-        "Emily Rishmawi",
-        "Mary Rishmawi",
-        "Mousa Rishmawi",
-        "Amanda Rishmawi"
       ]
     },
     {
@@ -190,6 +189,36 @@
     },
     {
       "name": "Table 11",
+      "seats": 8,
+      "guests": [
+        "Khaled Abuaita",
+        "Sally Abuaita",
+        "Philip Abuaita",
+        "Janet Abuaita",
+        "Jamal Abuaita",
+        "Manal Abuaita",
+        "George Abuaita",
+        "Amal Abuaita"
+      ]
+    },
+    {
+      "name": "Table 12",
+      "seats": 10,
+      "guests": [
+        "Emil Abuaita",
+        "Eline Abuaita",
+        "Khader Abuaita",
+        "Lucy Abuaita",
+        "Nick Khoury",
+        "Mary Khoury",
+        "Emily Rishmawi",
+        "Mary Rishmawi",
+        "Mousa Rishmawi",
+        "Amanda Rishmawi"
+      ]
+    },
+    {
+      "name": "Table 13",
       "seats": 9,
       "guests": [
         "Elia Abuaita",
@@ -201,35 +230,6 @@
         "Ghada Yacoub",
         "Amira Hanna",
         "Elias Hanna"
-      ]
-    },
-    {
-      "name": "Table 12",
-      "seats": 8,
-      "guests": [
-        "Samer Abdullah",
-        "Brittany Abdullah",
-        "Nasri Abdullah",
-        "Ghada Abdullah",
-        "Abdullah Farah",
-        "Ameera Farah",
-        "Issa Abufarha",
-        "Chelsy Abufarha"
-      ]
-    },
-    {
-      "name": "Table 13",
-      "seats": 9,
-      "guests": [
-        "George Ishaq",
-        "Hiam Ishaq",
-        "Nidal Ishaq",
-        "Samer Ishaq",
-        "Issa Odeh",
-        "Issa Daoud",
-        "Vera Daoud",
-        "Tony Daoud",
-        "Amanda Daoud"
       ]
     },
     {
