@@ -38,8 +38,8 @@
         "Rana Tannous",
         "Samer Ghawi"
       ],
-      "x": 24.5,
-      "y": 32.5,
+      "x": 23.5,
+      "y": 31.5,
       "rot": 90
     },
     {
@@ -71,8 +71,8 @@
         "Lena Ibrahim",
         "Mariela Ibrahim"
       ],
-      "x": 37.5,
-      "y": 32.5,
+      "x": 38,
+      "y": 31,
       "rot": 90
     },
     {
@@ -144,7 +144,7 @@
         "Suhaila Abuaita"
       ],
       "x": 55.5,
-      "y": 24.5,
+      "y": 23,
       "rot": 0
     },
     {
@@ -180,8 +180,8 @@
         "Hanna Moussa",
         "Alondra Haddad"
       ],
-      "x": 46.5,
-      "y": 40.5,
+      "x": 47.5,
+      "y": 40,
       "rot": 0
     },
     {
@@ -214,8 +214,8 @@
         "Wael Hayek",
         "Kholoud Hayek"
       ],
-      "x": 55.5,
-      "y": 35.5,
+      "x": 56,
+      "y": 34.5,
       "rot": 0
     },
     {
@@ -232,7 +232,7 @@
         "Amal Abuaita"
       ],
       "x": 14.5,
-      "y": 48,
+      "y": 49.5,
       "rot": 0
     },
     {
@@ -250,8 +250,8 @@
         "Mousa Rishmawi",
         "Amanda Rishmawi"
       ],
-      "x": 46.5,
-      "y": 51,
+      "x": 47.5,
+      "y": 50.5,
       "rot": 0
     },
     {
@@ -269,7 +269,7 @@
         "Elias Hanna"
       ],
       "x": 6,
-      "y": 44.5,
+      "y": 45,
       "rot": 0
     },
     {
@@ -286,8 +286,8 @@
         "Fr. Amin Houli",
         "Rania Houli"
       ],
-      "x": 55.5,
-      "y": 47,
+      "x": 55.7,
+      "y": 46,
       "rot": 0
     }
   ],
@@ -300,7 +300,7 @@
     {
       "id": "f1",
       "label": "Dance floor",
-      "x": 30,
+      "x": 31,
       "y": 7.5,
       "w": 26,
       "h": 14.5,
