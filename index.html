@@ -77,6 +77,16 @@ footer{display:flex;justify-content:center}
 @media (max-width:420px){.wrap{padding:28px 16px 48px}.r-table{font-size:24px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 .loading{color:var(--muted);text-align:center}
+.dir{columns:3 280px;column-gap:28px}
+.letter{break-inside:avoid;margin:0 0 18px}
+.letter h3{margin:0 0 6px;padding-bottom:4px;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:600;font-size:26px;color:var(--gold);line-height:1.1}
+.letter ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
+.letter li{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:6px 10px;border-radius:8px}
+.letter li:nth-child(even){background:rgba(0,0,0,.06)}
+.dn{min-width:0}
+.dt{color:var(--gold);white-space:nowrap;font-size:14px;font-variant-numeric:tabular-nums}
+.letter li.me{background:var(--wine);box-shadow:0 0 0 1px var(--gold)}
+.letter li.me .dn{font-weight:600}
 </style>
 </head>
 <body>
@@ -101,7 +111,7 @@ footer{display:flex;justify-content:center}
     document.title="Find Your Seat · "+e.title;
     app.innerHTML='<main class="wrap"><header class="hero"><p class="eyebrow">'+esc(e.subtitle)+'</p><h1>'+esc(e.title).replace("&amp;",'<span class="amp">&amp;</span>')+'</h1><p class="date">'+esc(e.date)+(e.place?' · '+esc(e.place):'')+'</p><div class="rule" aria-hidden="true"><span></span></div>'+(data.example?'<span class="sample-pill">Preview with sample names</span>':'')+'</header>'+
       '<section class="finder"><label for="q">Find your seat</label><input id="q" class="search" type="search" placeholder="Type your first or last name" autocomplete="off" autocapitalize="words" enterkeyhint="search"><div id="results" class="results" aria-live="polite"></div></section>'+
-      '<section aria-labelledby="all-h"><h2 id="all-h" class="section-h">All tables</h2><div id="grid" class="grid"></div></section></main>';
+      '<section aria-labelledby="all-h"><h2 id="all-h" class="section-h">All guests · A to Z by last name</h2><div id="grid" class="dir"></div></section></main>';
     var q=document.getElementById("q");
     q.addEventListener("input",function(){query=q.value;update();});
     update();
@@ -112,11 +122,18 @@ footer{display:flex;justify-content:center}
     var res="";
     if(norm(query).length>=2) res=m.length?m.map(function(x){return '<div class="result"><span class="r-name">'+esc(x.name)+'</span><span class="r-label">is seated at</span><span class="r-table">'+esc(x.table.name)+'</span></div>';}).join(""):'<p class="nomatch">No match for “'+esc(query)+'”. Try your last name, or ask one of the hosts.</p>';
     document.getElementById("results").innerHTML=res;
-    document.getElementById("grid").innerHTML=data.tables.map(function(t,ti){
-      return '<article class="card'+(ht[ti]?' hit':'')+'"><div class="card-head"><h3>'+esc(t.name)+'</h3><span class="count">'+t.guests.length+(t.guests.length===1?' guest':' guests')+'</span></div>'+
-        (t.guests.length?'<ul class="names">'+t.guests.map(function(g){return '<li'+(hn[ti+"|"+g]?' class="me"':'')+'>'+esc(g)+'</li>';}).join("")+'</ul>':'<p class="empty">No guests yet</p>')+'</article>';
-    }).join("");
+    var all=[];
+    data.tables.forEach(function(t,ti){ t.guests.forEach(function(g){ all.push({name:g,table:t.name,ti:ti,key:lastKey(g)}); }); });
+    all.sort(function(a,b){ return a.key.localeCompare(b.key)||norm(a.name).localeCompare(norm(b.name)); });
+    var groups=[], cur=null;
+    all.forEach(function(x){ var L=(x.key.charAt(0)||"#").toUpperCase(); if(!/[A-Z]/.test(L)) L="#"; if(!cur||cur.L!==L){ cur={L:L,items:[]}; groups.push(cur); } cur.items.push(x); });
+    document.getElementById("grid").innerHTML=groups.map(function(g){
+      return '<section class="letter"><h3>'+g.L+'</h3><ul>'+g.items.map(function(x){
+        return '<li'+(hn[x.ti+"|"+x.name]?' class="me"':'')+'><span class="dn">'+esc(x.name)+'</span><span class="dt">'+esc(x.table)+'</span></li>';
+      }).join("")+'</ul></section>';
+    }).join("")||'<p class="empty">No guests yet</p>';
   }
+  function lastKey(n){ var p=norm(n).split(" "); return p[p.length-1]||""; }
   fetch("seating.json",{cache:"no-cache"}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){data=d;render();})
     .catch(function(){app.innerHTML='<main class="wrap"><p class="loading">The seating chart couldn’t load. Check your connection and refresh, or ask one of the hosts.</p></main>';});
 })();
