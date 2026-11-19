@@ -186,7 +186,7 @@
     },
     {
       "name": "Table 9",
-      "seats": 8,
+      "seats": 10,
       "guests": [
         "Andrew Alkazaha",
         "Julian Alkazaha",
@@ -195,7 +195,9 @@
         "Batoul Burbar",
         "Patrick Patrus",
         "Maya Halloun",
-        "Angelina Abufarha"
+        "Angelina Abufarha",
+        "Nallely Preciado",
+        "Naomi Preciado"
       ],
       "x": 6,
       "y": 34,
