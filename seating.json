@@ -88,8 +88,8 @@
         "Laila Shahla",
         "Nour Ishak"
       ],
-      "x": 4.5,
-      "y": 16,
+      "x": 16.5,
+      "y": 22.5,
       "rot": 0
     },
     {
@@ -107,8 +107,8 @@
         "Saher Ibrahim",
         "Angie Ibrahim"
       ],
-      "x": 15,
-      "y": 21,
+      "x": 45,
+      "y": 22.5,
       "rot": 0
     },
     {
@@ -125,8 +125,8 @@
         "Tony Daoud",
         "Amanda Daoud"
       ],
-      "x": 45,
-      "y": 19.5,
+      "x": 16.5,
+      "y": 32.5,
       "rot": 0
     },
     {
@@ -143,8 +143,8 @@
         "Sana Qassis",
         "Suhaila Abuaita"
       ],
-      "x": 47.5,
-      "y": 30.5,
+      "x": 45,
+      "y": 33,
       "rot": 0
     },
     {
@@ -176,8 +176,8 @@
         "Hanna Moussa",
         "Alondra Haddad"
       ],
-      "x": 55,
-      "y": 24,
+      "x": 16,
+      "y": 42.5,
       "rot": 0
     },
     {
@@ -191,8 +191,8 @@
         "Mazen Massoud",
         "Diana Tzinis"
       ],
-      "x": 3.8,
-      "y": 29.5,
+      "x": 6.5,
+      "y": 36,
       "rot": 0
     },
     {
@@ -210,8 +210,8 @@
         "Nallely Preciado",
         "Naomi Preciado"
       ],
-      "x": 5.5,
-      "y": 43.5,
+      "x": 55,
+      "y": 27.5,
       "rot": 0
     },
     {
@@ -227,8 +227,8 @@
         "Wael Hayek",
         "Kholoud Hayek"
       ],
-      "x": 4.5,
-      "y": 55,
+      "x": 6.5,
+      "y": 25.5,
       "rot": 0
     },
     {
@@ -244,8 +244,8 @@
         "George Abuaita",
         "Amal Abuaita"
       ],
-      "x": 53.5,
-      "y": 49.5,
+      "x": 55,
+      "y": 38.5,
       "rot": 0
     },
     {
@@ -263,8 +263,8 @@
         "Mousa Rishmawi",
         "Amanda Rishmawi"
       ],
-      "x": 54,
-      "y": 38,
+      "x": 44.5,
+      "y": 53.5,
       "rot": 0
     },
     {
@@ -281,8 +281,8 @@
         "Amira Hanna",
         "Elias Hanna"
       ],
-      "x": 17.5,
-      "y": 49.5,
+      "x": 6,
+      "y": 46.5,
       "rot": 0
     },
     {
@@ -299,8 +299,8 @@
         "Fr. Amin Houli",
         "Rania Houli"
       ],
-      "x": 14,
-      "y": 35.5,
+      "x": 54.5,
+      "y": 49,
       "rot": 0
     }
   ],
