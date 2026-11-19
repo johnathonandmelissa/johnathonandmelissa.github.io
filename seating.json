@@ -38,9 +38,9 @@
         "Rana Tannous",
         "Samer Ghawi"
       ],
-      "x": 16.5,
-      "y": 4,
-      "rot": 0
+      "x": 25.5,
+      "y": 33,
+      "rot": 90
     },
     {
       "name": "Head Table 2",
@@ -71,9 +71,9 @@
         "Lena Ibrahim",
         "Mariela Ibrahim"
       ],
-      "x": 44.5,
-      "y": 4,
-      "rot": 0
+      "x": 35.5,
+      "y": 32,
+      "rot": 90
     },
     {
       "name": "Table 3",
@@ -88,8 +88,8 @@
         "Laila Shahla",
         "Nour Ishak"
       ],
-      "x": 7.5,
-      "y": 13,
+      "x": 4.5,
+      "y": 16,
       "rot": 0
     },
     {
@@ -107,8 +107,8 @@
         "Saher Ibrahim",
         "Angie Ibrahim"
       ],
-      "x": 16.5,
-      "y": 13,
+      "x": 15,
+      "y": 21,
       "rot": 0
     },
     {
@@ -125,8 +125,8 @@
         "Tony Daoud",
         "Amanda Daoud"
       ],
-      "x": 25.5,
-      "y": 13,
+      "x": 45,
+      "y": 19.5,
       "rot": 0
     },
     {
@@ -143,8 +143,8 @@
         "Sana Qassis",
         "Suhaila Abuaita"
       ],
-      "x": 34.5,
-      "y": 13,
+      "x": 47.5,
+      "y": 30.5,
       "rot": 0
     },
     {
@@ -160,8 +160,8 @@
         "Issa Abufarha",
         "Chelsy Abufarha"
       ],
-      "x": 43.5,
-      "y": 13,
+      "x": 45,
+      "y": 43,
       "rot": 0
     },
     {
@@ -176,8 +176,8 @@
         "Hanna Moussa",
         "Alondra Haddad"
       ],
-      "x": 52.5,
-      "y": 13,
+      "x": 55,
+      "y": 24,
       "rot": 0
     },
     {
@@ -191,8 +191,8 @@
         "Mazen Massoud",
         "Diana Tzinis"
       ],
-      "x": 7.5,
-      "y": 22,
+      "x": 3.8,
+      "y": 29.5,
       "rot": 0
     },
     {
@@ -210,8 +210,8 @@
         "Nallely Preciado",
         "Naomi Preciado"
       ],
-      "x": 16.5,
-      "y": 22,
+      "x": 5.5,
+      "y": 43.5,
       "rot": 0
     },
     {
@@ -227,8 +227,8 @@
         "Wael Hayek",
         "Kholoud Hayek"
       ],
-      "x": 25.5,
-      "y": 22,
+      "x": 4.5,
+      "y": 55,
       "rot": 0
     },
     {
@@ -244,8 +244,8 @@
         "George Abuaita",
         "Amal Abuaita"
       ],
-      "x": 34.5,
-      "y": 22,
+      "x": 53.5,
+      "y": 49.5,
       "rot": 0
     },
     {
@@ -263,8 +263,8 @@
         "Mousa Rishmawi",
         "Amanda Rishmawi"
       ],
-      "x": 43.5,
-      "y": 22,
+      "x": 54,
+      "y": 38,
       "rot": 0
     },
     {
@@ -281,8 +281,8 @@
         "Amira Hanna",
         "Elias Hanna"
       ],
-      "x": 52.5,
-      "y": 22,
+      "x": 17.5,
+      "y": 49.5,
       "rot": 0
     },
     {
@@ -299,8 +299,8 @@
         "Fr. Amin Houli",
         "Rania Houli"
       ],
-      "x": 7.5,
-      "y": 31,
+      "x": 14,
+      "y": 35.5,
       "rot": 0
     }
   ],
