@@ -166,13 +166,9 @@
     },
     {
       "name": "Table 8",
-      "seats": 11,
+      "seats": 8,
       "guests": [
-        "Thomas Menegotti",
         "George Baqileh",
-        "Saro Karimi",
-        "Faizan Khan",
-        "Rayan Pasha",
         "Fadi El-Chaer",
         "Maria Morcos",
         "Scott Shacker",
@@ -290,6 +286,21 @@
       ],
       "x": 55.7,
       "y": 44.5,
+      "rot": 0
+    },
+    {
+      "name": "Table 15",
+      "seats": 6,
+      "guests": [
+        "Thomas Menegotti",
+        "Saro Karimi",
+        "Rayan Pasha",
+        "Faizan Khan",
+        "Mazen Massoud",
+        "Diana Tzinis"
+      ],
+      "x": 30,
+      "y": 35,
       "rot": 0
     }
   ],
