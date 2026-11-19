@@ -9,7 +9,7 @@
   "tables": [
     {
       "name": "Head Table 1",
-      "seats": 25,
+      "seats": 26,
       "guests": [
         "Habib Tannous",
         "Nancy Tannous",
@@ -38,9 +38,9 @@
         "Rana Tannous",
         "Samer Ghawi"
       ],
-      "x": 23.5,
-      "y": 31.5,
-      "rot": 90
+      "x": 16.5,
+      "y": 4,
+      "rot": 0
     },
     {
       "name": "Head Table 2",
@@ -71,9 +71,9 @@
         "Lena Ibrahim",
         "Mariela Ibrahim"
       ],
-      "x": 37,
-      "y": 30.5,
-      "rot": 90
+      "x": 44.5,
+      "y": 4,
+      "rot": 0
     },
     {
       "name": "Table 3",
@@ -88,8 +88,8 @@
         "Laila Shahla",
         "Nour Ishak"
       ],
-      "x": 14.5,
-      "y": 29,
+      "x": 7.5,
+      "y": 13,
       "rot": 0
     },
     {
@@ -107,8 +107,8 @@
         "Saher Ibrahim",
         "Angie Ibrahim"
       ],
-      "x": 47,
-      "y": 28,
+      "x": 16.5,
+      "y": 13,
       "rot": 0
     },
     {
@@ -125,8 +125,8 @@
         "Tony Daoud",
         "Amanda Daoud"
       ],
-      "x": 6,
-      "y": 24,
+      "x": 25.5,
+      "y": 13,
       "rot": 0
     },
     {
@@ -143,8 +143,8 @@
         "Sana Qassis",
         "Suhaila Abuaita"
       ],
-      "x": 55.5,
-      "y": 24,
+      "x": 34.5,
+      "y": 13,
       "rot": 0
     },
     {
@@ -160,8 +160,8 @@
         "Issa Abufarha",
         "Chelsy Abufarha"
       ],
-      "x": 14.5,
-      "y": 39,
+      "x": 43.5,
+      "y": 13,
       "rot": 0
     },
     {
@@ -176,12 +176,27 @@
         "Hanna Moussa",
         "Alondra Haddad"
       ],
-      "x": 47,
-      "y": 39,
+      "x": 52.5,
+      "y": 13,
       "rot": 0
     },
     {
       "name": "Table 9",
+      "seats": 8,
+      "guests": [
+        "Thomas Menegotti",
+        "Saro Karimi",
+        "Rayan Pasha",
+        "Faizan Khan",
+        "Mazen Massoud",
+        "Diana Tzinis"
+      ],
+      "x": 7.5,
+      "y": 22,
+      "rot": 0
+    },
+    {
+      "name": "Table 10",
       "seats": 10,
       "guests": [
         "Andrew Alkazaha",
@@ -195,12 +210,12 @@
         "Nallely Preciado",
         "Naomi Preciado"
       ],
-      "x": 6,
-      "y": 34,
+      "x": 16.5,
+      "y": 22,
       "rot": 0
     },
     {
-      "name": "Table 10",
+      "name": "Table 11",
       "seats": 8,
       "guests": [
         "Danial Burbar",
@@ -212,12 +227,12 @@
         "Wael Hayek",
         "Kholoud Hayek"
       ],
-      "x": 56,
-      "y": 34,
+      "x": 25.5,
+      "y": 22,
       "rot": 0
     },
     {
-      "name": "Table 11",
+      "name": "Table 12",
       "seats": 8,
       "guests": [
         "Khaled Abuaita",
@@ -229,12 +244,12 @@
         "George Abuaita",
         "Amal Abuaita"
       ],
-      "x": 14.5,
-      "y": 49.5,
+      "x": 34.5,
+      "y": 22,
       "rot": 0
     },
     {
-      "name": "Table 12",
+      "name": "Table 13",
       "seats": 10,
       "guests": [
         "Emil Abuaita",
@@ -248,12 +263,12 @@
         "Mousa Rishmawi",
         "Amanda Rishmawi"
       ],
-      "x": 47,
-      "y": 50,
+      "x": 43.5,
+      "y": 22,
       "rot": 0
     },
     {
-      "name": "Table 13",
+      "name": "Table 14",
       "seats": 9,
       "guests": [
         "Elia Abuaita",
@@ -266,12 +281,12 @@
         "Amira Hanna",
         "Elias Hanna"
       ],
-      "x": 6,
-      "y": 44,
+      "x": 52.5,
+      "y": 22,
       "rot": 0
     },
     {
-      "name": "Table 14",
+      "name": "Table 15",
       "seats": 9,
       "guests": [
         "Khalil Isaac",
@@ -284,23 +299,8 @@
         "Fr. Amin Houli",
         "Rania Houli"
       ],
-      "x": 55.7,
-      "y": 44.5,
-      "rot": 0
-    },
-    {
-      "name": "Table 15",
-      "seats": 6,
-      "guests": [
-        "Thomas Menegotti",
-        "Saro Karimi",
-        "Rayan Pasha",
-        "Faizan Khan",
-        "Mazen Massoud",
-        "Diana Tzinis"
-      ],
-      "x": 30,
-      "y": 35,
+      "x": 7.5,
+      "y": 31,
       "rot": 0
     }
   ],
