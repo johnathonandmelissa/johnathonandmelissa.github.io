@@ -221,8 +221,8 @@
         "Wael Hayek",
         "Kholoud Hayek"
       ],
-      "x": 7.5,
-      "y": 36.5,
+      "x": 8,
+      "y": 27,
       "rot": 0
     },
     {
@@ -238,8 +238,8 @@
         "George Abuaita",
         "Amal Abuaita"
       ],
-      "x": 7.5,
-      "y": 47.5,
+      "x": 8,
+      "y": 36.5,
       "rot": 0
     },
     {
@@ -273,8 +273,8 @@
         "Amira Hanna",
         "Elias Hanna"
       ],
-      "x": 16.5,
-      "y": 52,
+      "x": 16,
+      "y": 51.5,
       "rot": 0
     },
     {
@@ -304,8 +304,8 @@
         "Frank Hermiz",
         "Photographer 2"
       ],
-      "x": 7.5,
-      "y": 27,
+      "x": 8,
+      "y": 46.5,
       "rot": 0
     }
   ],
