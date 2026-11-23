@@ -108,7 +108,7 @@
     },
     {
       "name": "Table 5",
-      "seats": 9,
+      "seats": 10,
       "guests": [
         "George Ishaq",
         "Hiam Ishaq",
@@ -244,7 +244,7 @@
     },
     {
       "name": "Table 13",
-      "seats": 10,
+      "seats": 8,
       "guests": [
         "Emil Abuaita",
         "Eline Abuaita",
