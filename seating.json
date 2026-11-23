@@ -65,7 +65,13 @@
         "Julia Ishak",
         "Miguel Ibrahim",
         "Lena Ibrahim",
-        "Mariela Ibrahim"
+        "Mariela Ibrahim",
+        "Amany Rishmawi",
+        "Christina Rishmawi",
+        "Jasmine Shahla",
+        "Giselle Shahla",
+        "Laila Shahla",
+        "Nour Ishak"
       ],
       "x": 35.5,
       "y": 32,
@@ -74,14 +80,7 @@
     {
       "name": "Table 3",
       "seats": 8,
-      "guests": [
-        "Amany Rishmawi",
-        "Christina Rishmawi",
-        "Jasmine Shahla",
-        "Giselle Shahla",
-        "Laila Shahla",
-        "Nour Ishak"
-      ],
+      "guests": [],
       "x": 16.5,
       "y": 22.5,
       "rot": 0
