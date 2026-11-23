@@ -83,8 +83,8 @@
         "Nour Ishak",
         "Alyssa Isaac"
       ],
-      "x": 7.5,
-      "y": 24.5,
+      "x": 54,
+      "y": 27,
       "rot": 0
     },
     {
@@ -103,7 +103,7 @@
         "Angie Ibrahim"
       ],
       "x": 45,
-      "y": 22.5,
+      "y": 32.5,
       "rot": 0
     },
     {
@@ -120,8 +120,8 @@
         "Tony Daoud",
         "Amanda Daoud"
       ],
-      "x": 16.5,
-      "y": 32.5,
+      "x": 45,
+      "y": 22.5,
       "rot": 0
     },
     {
@@ -137,8 +137,8 @@
         "Imad Qassis",
         "Sana Qassis"
       ],
-      "x": 45,
-      "y": 33,
+      "x": 16.5,
+      "y": 22,
       "rot": 0
     },
     {
@@ -154,8 +154,8 @@
         "Issa Abufarha",
         "Chelsy Abufarha"
       ],
-      "x": 45,
-      "y": 43,
+      "x": 16.5,
+      "y": 32,
       "rot": 0
     },
     {
@@ -204,8 +204,8 @@
         "Nallely Preciado",
         "Naomi Preciado"
       ],
-      "x": 55,
-      "y": 27.5,
+      "x": 45.5,
+      "y": 43,
       "rot": 0
     },
     {
@@ -221,8 +221,8 @@
         "Wael Hayek",
         "Kholoud Hayek"
       ],
-      "x": 16.5,
-      "y": 21.5,
+      "x": 7,
+      "y": 24.5,
       "rot": 0
     },
     {
@@ -239,7 +239,7 @@
         "Amal Abuaita"
       ],
       "x": 55,
-      "y": 38.5,
+      "y": 37,
       "rot": 0
     },
     {
@@ -304,8 +304,8 @@
         "Frank Hermiz",
         "Photographer 2"
       ],
-      "x": 30,
-      "y": 35,
+      "x": 17,
+      "y": 51.5,
       "rot": 0
     }
   ],
