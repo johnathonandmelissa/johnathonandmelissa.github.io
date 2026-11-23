@@ -65,14 +65,7 @@
         "Julia Ishak",
         "Miguel Ibrahim",
         "Lena Ibrahim",
-        "Mariela Ibrahim",
-        "Amany Rishmawi",
-        "Christina Rishmawi",
-        "Jasmine Shahla",
-        "Giselle Shahla",
-        "Laila Shahla",
-        "Nour Ishak",
-        "Alyssa Isaac"
+        "Mariela Ibrahim"
       ],
       "x": 35.5,
       "y": 32,
@@ -82,12 +75,13 @@
       "name": "Table 3",
       "seats": 8,
       "guests": [
-        "DJ Furat",
-        "Drummer",
-        "Frank Hermiz",
-        "Photographer 2",
-        "Photo Booth 1",
-        "Photo Booth 2"
+        "Amany Rishmawi",
+        "Christina Rishmawi",
+        "Jasmine Shahla",
+        "Giselle Shahla",
+        "Laila Shahla",
+        "Nour Ishak",
+        "Alyssa Isaac"
       ],
       "x": 7.5,
       "y": 24.5,
@@ -299,6 +293,19 @@
       ],
       "x": 55,
       "y": 49,
+      "rot": 0
+    },
+    {
+      "name": "Table 16",
+      "seats": 8,
+      "guests": [
+        "DJ Furat",
+        "Drummer",
+        "Frank Hermiz",
+        "Photographer 2"
+      ],
+      "x": 30,
+      "y": 35,
       "rot": 0
     }
   ],
