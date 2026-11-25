@@ -193,7 +193,7 @@
     },
     {
       "name": "Table 10",
-      "seats": 10,
+      "seats": 8,
       "guests": [
         "Andrew Alkazaha",
         "Julian Alkazaha",
@@ -201,8 +201,6 @@
         "Patrick Patrus",
         "Maya Halloun",
         "Angelina Abufarha",
-        "Nallely Preciado",
-        "Naomi Preciado",
         "Fadi Abuaita"
       ],
       "x": 16.5,
@@ -245,7 +243,7 @@
     },
     {
       "name": "Table 13",
-      "seats": 8,
+      "seats": 10,
       "guests": [
         "Emil Abuaita",
         "Eline Abuaita",
@@ -254,7 +252,9 @@
         "Nick Khoury",
         "Mary Khoury",
         "Mousa Rishmawi",
-        "Amanda Rishmawi"
+        "Amanda Rishmawi",
+        "Janet Abuaita",
+        "Anwar Abuaita"
       ],
       "x": 54.5,
       "y": 47.5,
