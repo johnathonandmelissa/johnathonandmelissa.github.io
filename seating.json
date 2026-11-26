@@ -167,10 +167,12 @@
         "George Baqileh",
         "Fadi El-Chaer",
         "Maria Morcos",
-        "Scott Shacker",
-        "Daniella Perez",
-        "Hanna Moussa",
-        "Alondra Haddad"
+        "Thomas Menegotti",
+        "Saro Karimi",
+        "Rayan Pasha",
+        "Faizan Khan",
+        "Mazen Massoud",
+        "Diana Tzinis"
       ],
       "x": 16.5,
       "y": 23,
@@ -179,14 +181,7 @@
     {
       "name": "Table 9",
       "seats": 8,
-      "guests": [
-        "Thomas Menegotti",
-        "Saro Karimi",
-        "Rayan Pasha",
-        "Faizan Khan",
-        "Mazen Massoud",
-        "Diana Tzinis"
-      ],
+      "guests": [],
       "x": 16.5,
       "y": 32,
       "rot": 0
