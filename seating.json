@@ -67,7 +67,8 @@
         "Lena Ibrahim",
         "Mariela Ibrahim",
         "Christina Rishmawi",
-        "Jasmine Shahla"
+        "Jasmine Shahla",
+        "George Odeh"
       ],
       "x": 35.5,
       "y": 32,
@@ -91,10 +92,8 @@
     },
     {
       "name": "Table 4",
-      "seats": 10,
+      "seats": 8,
       "guests": [
-        "Michael Ibrahim",
-        "Jehan Ibrahim",
         "Majdi Alkazaha",
         "Rula Alkazaha",
         "Maher Qazaha",
@@ -162,7 +161,7 @@
     },
     {
       "name": "Table 8",
-      "seats": 8,
+      "seats": 10,
       "guests": [
         "George Baqileh",
         "Fadi El-Chaer",
